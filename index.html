@@ -214,10 +214,10 @@
     .apple-pill-bar {
       display: inline-flex;
       align-items: center;
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.22);
       border: 1px solid var(--border-glass);
       border-radius: 9999px;
-      padding: 3px;
+      padding: 2px;
       gap: 2px;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -230,9 +230,9 @@
     }
 
     .apple-pill-btn {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 590;
-      padding: 5px 11px;
+      padding: 4px 9px;
       border-radius: 9999px;
       color: var(--text-secondary);
       border: 1px solid transparent;
@@ -241,7 +241,7 @@
       align-items: center;
       gap: 4px;
       cursor: pointer;
-      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       white-space: nowrap;
     }
 
@@ -270,9 +270,9 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      padding: 3px 9px;
+      padding: 2px 8px;
       border-radius: 9999px;
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 600;
       letter-spacing: 0.2px;
       background: rgba(56, 189, 248, 0.12);
@@ -284,8 +284,8 @@
       background: var(--chassis-bg);
       border: 1px solid var(--chassis-border);
       box-shadow: var(--chassis-shadow);
-      border-radius: 24px;
-      padding: 16px;
+      border-radius: 20px;
+      padding: 14px;
       position: relative;
       transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
     }
@@ -299,7 +299,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      border-radius: 24px;
+      border-radius: 20px;
       pointer-events: none;
       opacity: 0;
       background: radial-gradient(circle 420px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.12), transparent 80%);
@@ -312,10 +312,17 @@
     }
 
     .key-grid {
-      display: grid;
-      grid-gap: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
       position: relative;
       z-index: 2;
+    }
+
+    .key-row {
+      display: flex;
+      align-items: stretch;
+      gap: 6px;
     }
 
     .keycap {
@@ -333,6 +340,7 @@
       height: 48px;
       position: relative;
       cursor: pointer;
+      box-sizing: border-box;
       transition: transform 0.08s ease, background-color 0.15s ease, box-shadow 0.12s ease, border-color 0.15s ease;
       touch-action: manipulation;
     }
@@ -343,7 +351,7 @@
     }
 
     .keycap.half-height {
-      height: 21px;
+      height: 21px !important;
       font-size: 10px;
     }
 
@@ -425,12 +433,10 @@
       -webkit-backdrop-filter: blur(12px);
     }
 
-    @media (max-width: 1200px) {
-      #keyboard-scroll-wrap {
-        overflow-x: auto;
-        padding-bottom: 8px;
-        -webkit-overflow-scrolling: touch;
-      }
+    #keyboard-scroll-wrap {
+      overflow-x: auto;
+      padding-bottom: 8px;
+      -webkit-overflow-scrolling: touch;
     }
   </style>
 </head>
@@ -439,33 +445,35 @@
   <!-- Ambient Dynamic visionOS Aurora Mesh Background -->
   <div class="aurora-mesh" aria-hidden="true"></div>
 
-  <!-- Header & Navigation Bar -->
-  <header class="relative z-20 border-b border-[var(--border-glass)] backdrop-blur-2xl bg-[var(--bg-page)]/80 sticky top-0 transition-colors">
-    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+  <!-- Sleek Slimline Header & Navigation Bar -->
+  <header class="relative z-20 border-b border-[var(--border-glass)] backdrop-blur-2xl bg-[var(--bg-page)]/85 sticky top-0 transition-colors">
+    <div class="max-w-[1440px] mx-auto px-3 sm:px-5 py-2 flex flex-wrap items-center justify-between gap-2.5">
       
-      <!-- Brand & Status Group -->
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0071e3] to-[#2997ff] flex items-center justify-center text-white font-bold text-sm shadow-md shadow-blue-500/20">
-          
+      <!-- Brand & Status Group with Native Apple SVG -->
+      <div class="flex items-center gap-2.5">
+        <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-[#0071e3] to-[#2997ff] flex items-center justify-center text-white shadow-md shadow-blue-500/20 shrink-0">
+          <!-- Official Apple SVG Logo -->
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 170 170">
+            <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.7-11.64-13.98-6.19-9.57-11.06-20.9-14.61-34-3.56-13.1-5.34-25.07-5.34-35.91 0-14.52 3.65-26.68 10.96-36.48 7.31-9.8 16.59-14.83 27.83-15.09 5.34 0 11.08 1.41 17.21 4.23 6.13 2.82 10.02 4.29 11.67 4.41 1.42 0 5.6-1.54 12.54-4.63 6.94-3.08 12.87-4.46 17.78-4.13 13.68.87 24.36 5.86 32.04 14.98-11.96 7.27-17.84 17.15-17.63 29.64.21 9.87 4.13 18.23 11.75 25.09 7.62 6.85 16.64 10.74 27.06 11.66-2.28 7.07-5.11 14.66-8.5 22.77zM119.22 33.15c0-7.39 2.66-14.42 7.97-21.08 5.31-6.66 11.85-10.74 19.63-12.24.22 1.3.33 2.4.33 3.3 0 7.28-2.83 14.37-8.49 21.28-5.65 6.9-12.33 10.99-20.03 12.27-.11-1.09-.17-2.12-.17-3.1l.76-.43z"/>
+          </svg>
         </div>
         <div>
-          <div class="flex items-center gap-2">
-            <h1 class="text-sm font-semibold tracking-tight text-[var(--text-primary)]">Magic Keyboard Diagnostics</h1>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-[var(--accent-green)] border border-emerald-500/30">PRO</span>
-            <!-- Live Auto OS Detection Badge -->
+          <div class="flex items-center gap-1.5">
+            <h1 class="text-xs sm:text-sm font-semibold tracking-tight text-[var(--text-primary)]">Magic Keyboard Diagnostics</h1>
+            <span class="text-[8.5px] font-bold px-1.5 py-0.2 rounded-full bg-emerald-500/15 text-[var(--accent-green)] border border-emerald-500/30">PRO</span>
+            <!-- Live Auto OS Detection Badge with SVG -->
             <span id="os-detect-badge" class="os-detected-badge" title="Automatically detected operating system">
-              <span id="os-detect-icon"></span>
-              <span id="os-detect-text">Auto: macOS</span>
+              <span id="os-detect-icon" class="flex items-center"></span>
+              <span id="os-detect-text">Detecting...</span>
             </span>
           </div>
-          <p class="text-[11px] text-[var(--text-secondary)] hidden sm:block">Hardware Telemetry, NKRO Matrix &amp; Switch Bounce Lab</p>
         </div>
       </div>
 
-      <!-- Redesigned Apple macOS-Style Segmented Controls Bar -->
-      <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
+      <!-- Segmented Controls Pill Bar -->
+      <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
         
-        <!-- Layout Switcher (Compact 75% | Full 100%) -->
+        <!-- Layout Switcher (75% Compact | 100% Full) -->
         <div class="apple-pill-bar" role="group" aria-label="Keyboard Layout Selector">
           <button id="btn-layout-compact" class="apple-pill-btn active" onclick="setLayout('compact')">
             <span>75% Compact</span>
@@ -475,33 +483,39 @@
           </button>
         </div>
 
-        <!-- OS Key Modifier Legend Switcher (macOS | Windows) -->
+        <!-- OS Key Modifier Legend Switcher (macOS | Windows) with SVG Icons -->
         <div class="apple-pill-bar" role="group" aria-label="OS Modifier Legends">
           <button id="btn-os-mac" class="apple-pill-btn active" onclick="setOSLegends('mac')">
-            <span> macOS</span>
+            <svg class="w-3 h-3 fill-current" viewBox="0 0 170 170">
+              <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.7-11.64-13.98-6.19-9.57-11.06-20.9-14.61-34-3.56-13.1-5.34-25.07-5.34-35.91 0-14.52 3.65-26.68 10.96-36.48 7.31-9.8 16.59-14.83 27.83-15.09 5.34 0 11.08 1.41 17.21 4.23 6.13 2.82 10.02 4.29 11.67 4.41 1.42 0 5.6-1.54 12.54-4.63 6.94-3.08 12.87-4.46 17.78-4.13 13.68.87 24.36 5.86 32.04 14.98-11.96 7.27-17.84 17.15-17.63 29.64.21 9.87 4.13 18.23 11.75 25.09 7.62 6.85 16.64 10.74 27.06 11.66-2.28 7.07-5.11 14.66-8.5 22.77zM119.22 33.15c0-7.39 2.66-14.42 7.97-21.08 5.31-6.66 11.85-10.74 19.63-12.24.22 1.3.33 2.4.33 3.3 0 7.28-2.83 14.37-8.49 21.28-5.65 6.9-12.33 10.99-20.03 12.27-.11-1.09-.17-2.12-.17-3.1l.76-.43z"/>
+            </svg>
+            <span>macOS</span>
           </button>
           <button id="btn-os-win" class="apple-pill-btn" onclick="setOSLegends('win')">
-            <span>⊞ Windows</span>
+            <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 16 16">
+              <path d="M0 2.253L6.5 1.36V7.5H0V2.253zm0 5.997H6.5v6.14l-6.5-.893V8.25zm7.5-6.993L16 0v7.5H7.5V1.257zM16 8.5v7.5l-8.5-1.257V8.5H16z"/>
+            </svg>
+            <span>Windows</span>
           </button>
         </div>
 
         <!-- Switch Sound Profile Selector -->
         <div class="apple-pill-bar" role="group" aria-label="Audio Switch Profile">
-          <button id="btn-sound-scissor" class="apple-pill-btn active" onclick="setSoundProfile('scissor')">
+          <button id="btn-sound-scissor" class="apple-pill-btn active" onclick="setSoundProfile('scissor')" title="Scissor Switch Sound">
             <span>✂️ Scissor</span>
           </button>
-          <button id="btn-sound-tactile" class="apple-pill-btn" onclick="setSoundProfile('tactile')">
+          <button id="btn-sound-tactile" class="apple-pill-btn" onclick="setSoundProfile('tactile')" title="Tactile Thock Sound">
             <span>🕹️ Tactile</span>
           </button>
-          <button id="btn-sound-clicky" class="apple-pill-btn" onclick="setSoundProfile('clicky')">
+          <button id="btn-sound-clicky" class="apple-pill-btn" onclick="setSoundProfile('clicky')" title="Clicky Switch Sound">
             <span>⚡ Clicky</span>
           </button>
-          <button id="btn-sound-mute" class="apple-pill-btn" onclick="setSoundProfile('mute')" title="Mute Switch Audio">
+          <button id="btn-sound-mute" class="apple-pill-btn" onclick="setSoundProfile('mute')" title="Mute Audio">
             <span>🔇</span>
           </button>
         </div>
 
-        <!-- Appearance Finish Switcher -->
+        <!-- Appearance Finish Switcher (Default: Space Black) -->
         <div class="apple-pill-bar" role="group" aria-label="Chassis Appearance Theme">
           <button id="btn-theme-dark" class="apple-pill-btn active" onclick="setTheme('dark')">
             <span>🌙 Space Black</span>
@@ -514,14 +528,9 @@
           </button>
         </div>
 
-        <!-- SEO & Google Search Console Hub Trigger -->
-        <button onclick="toggleSEOModal(true)" class="apple-pill-btn border border-[var(--accent-blue)]/30 text-[var(--accent-blue)] bg-[var(--accent-blue)]/10 hover:bg-[var(--accent-blue)]/20 transition" title="Open Google Search Console & SEO Configuration Hub">
-          <span>🔍 SEO &amp; GSC</span>
-        </button>
-
         <!-- Reset Diagnostics Button -->
         <button onclick="resetDiagnostics()" class="apple-pill-btn border border-[var(--accent-red)]/30 text-[var(--accent-red)] bg-[var(--accent-red)]/10 hover:bg-[var(--accent-red)]/20 transition" title="Reset all tested keys and counters">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>
           <span>Reset</span>
@@ -532,18 +541,18 @@
   </header>
 
   <!-- Main Workspace Container -->
-  <main class="relative z-10 max-w-[1380px] w-full mx-auto px-4 sm:px-6 pt-5 flex-1 flex flex-col gap-4">
+  <main class="relative z-10 max-w-[1440px] w-full mx-auto px-4 sm:px-6 pt-4 flex-1 flex flex-col gap-3">
     
     <!-- Bento Diagnostics Dashboard -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
       
       <!-- Card 1: Last Pressed Key Inspector -->
-      <div class="apple-card p-4 flex flex-col justify-between">
+      <div class="apple-card p-3.5 flex flex-col justify-between">
         <div class="flex items-center justify-between text-xs text-[var(--text-secondary)]">
           <span class="font-medium">Active Key Inspector</span>
           <span id="key-location-badge" class="px-2 py-0.5 rounded-full text-[10px] bg-white/10 text-[var(--text-secondary)]">Standard</span>
         </div>
-        <div class="my-2">
+        <div class="my-1.5">
           <div id="inspector-main-key" class="text-2xl font-bold font-mono tracking-tight text-[var(--text-primary)] truncate">—</div>
           <div class="text-[11px] font-mono text-[var(--text-secondary)] flex items-center gap-2 mt-0.5">
             <span>Code: <strong id="inspector-code" class="text-[var(--text-primary)]">—</strong></span>
@@ -551,60 +560,60 @@
             <span>KeyCode: <strong id="inspector-keycode" class="text-[var(--text-primary)]">—</strong></span>
           </div>
         </div>
-        <div class="text-[10px] text-[var(--text-secondary)] border-t border-[var(--border-glass)] pt-2 flex items-center justify-between">
+        <div class="text-[10px] text-[var(--text-secondary)] border-t border-[var(--border-glass)] pt-1.5 flex items-center justify-between">
           <span>Dwell: <strong id="inspector-dwell" class="text-[var(--accent-blue)]">0 ms</strong></span>
           <span id="chatter-indicator" class="text-[var(--accent-amber)] font-medium hidden">⚠️ Bounce &lt;15ms</span>
         </div>
       </div>
 
       <!-- Card 2: NKRO & Anti-Ghosting Meter -->
-      <div class="apple-card p-4 flex flex-col justify-between">
+      <div class="apple-card p-3.5 flex flex-col justify-between">
         <div class="flex items-center justify-between text-xs text-[var(--text-secondary)]">
           <span class="font-medium">Simultaneous (NKRO)</span>
           <span class="px-2 py-0.5 rounded-full text-[10px] bg-blue-500/15 text-[var(--accent-blue)] font-mono">Real-time</span>
         </div>
-        <div class="my-2 flex items-baseline gap-2">
+        <div class="my-1.5 flex items-baseline gap-2">
           <div id="active-keys-count" class="text-3xl font-extrabold font-mono text-[var(--accent-blue)]">0</div>
           <span class="text-xs text-[var(--text-secondary)]">active / <strong id="peak-kro-count" class="text-[var(--text-primary)] font-mono">0</strong> peak</span>
         </div>
-        <div class="text-[10px] text-[var(--text-secondary)] border-t border-[var(--border-glass)] pt-2 flex items-center justify-between">
+        <div class="text-[10px] text-[var(--text-secondary)] border-t border-[var(--border-glass)] pt-1.5 flex items-center justify-between">
           <span>Anti-Ghosting Matrix:</span>
           <span id="nkro-status-badge" class="text-[var(--accent-green)] font-semibold">100% Clean</span>
         </div>
       </div>
 
       <!-- Card 3: Switch Coverage Progress -->
-      <div class="apple-card p-4 flex flex-col justify-between">
+      <div class="apple-card p-3.5 flex flex-col justify-between">
         <div class="flex items-center justify-between text-xs text-[var(--text-secondary)]">
           <span class="font-medium">Switch Test Coverage</span>
           <span id="coverage-percent" class="font-mono text-xs font-bold text-[var(--accent-green)]">0%</span>
         </div>
-        <div class="my-2">
+        <div class="my-1.5">
           <div class="flex items-baseline gap-1.5">
             <span id="tested-count" class="text-2xl font-bold font-mono">0</span>
             <span class="text-xs text-[var(--text-secondary)]">/ <span id="total-keys-count">79</span> tested</span>
           </div>
-          <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden mt-2">
+          <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden mt-1.5">
             <div id="coverage-bar" class="h-full bg-[var(--accent-green)] transition-all duration-300" style="width: 0%"></div>
           </div>
         </div>
-        <div class="text-[10px] text-[var(--text-secondary)] border-t border-[var(--border-glass)] pt-2 flex items-center justify-between">
+        <div class="text-[10px] text-[var(--text-secondary)] border-t border-[var(--border-glass)] pt-1.5 flex items-center justify-between">
           <span>Total keystrokes:</span>
           <strong id="total-press-count" class="font-mono text-[var(--text-primary)]">0</strong>
         </div>
       </div>
 
       <!-- Card 4: Switch Health & Chatter Log -->
-      <div class="apple-card p-4 flex flex-col justify-between">
+      <div class="apple-card p-3.5 flex flex-col justify-between">
         <div class="flex items-center justify-between text-xs text-[var(--text-secondary)]">
           <span class="font-medium">Switch Bounce / Chatter</span>
           <span id="chatter-count-badge" class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/15 text-[var(--accent-green)] font-mono">0 detected</span>
         </div>
-        <div class="my-2">
+        <div class="my-1.5">
           <div id="chatter-status-text" class="text-sm font-semibold text-[var(--text-primary)]">Normal Contact</div>
           <div class="text-[11px] text-[var(--text-secondary)] mt-0.5">Threshold: &lt; 15ms release rebound</div>
         </div>
-        <div class="text-[10px] text-[var(--text-secondary)] border-t border-[var(--border-glass)] pt-2 flex items-center justify-between">
+        <div class="text-[10px] text-[var(--text-secondary)] border-t border-[var(--border-glass)] pt-1.5 flex items-center justify-between">
           <span>Audio Synthesizer:</span>
           <span id="audio-status-label" class="text-[var(--accent-blue)]">Web Audio Active</span>
         </div>
@@ -613,7 +622,7 @@
     </div>
 
     <!-- Live Keystroke Stream Pill Bar -->
-    <div class="apple-card px-4 py-2.5 flex items-center gap-3 overflow-hidden text-xs">
+    <div class="apple-card px-3.5 py-2 flex items-center gap-2.5 overflow-hidden text-xs">
       <div class="flex items-center gap-1.5 shrink-0 text-[var(--text-secondary)] font-medium">
         <svg class="w-3.5 h-3.5 text-[var(--accent-blue)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -649,44 +658,44 @@
     </section>
 
     <!-- Semantic SEO Content & FAQ -->
-    <section aria-labelledby="seo-guide-heading" class="mt-8 pt-6 border-t border-[var(--border-glass)] flex flex-col gap-6">
+    <section aria-labelledby="seo-guide-heading" class="mt-6 pt-5 border-t border-[var(--border-glass)] flex flex-col gap-5">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
           <span class="text-[11px] font-semibold uppercase tracking-widest text-[var(--accent-blue)]">Hardware Diagnostics Guide</span>
-          <h2 id="seo-guide-heading" class="text-xl sm:text-2xl font-bold tracking-tight mt-1">
+          <h2 id="seo-guide-heading" class="text-lg sm:text-xl font-bold tracking-tight mt-1">
             Professional Online Keyboard Tester for Apple Magic Keyboard &amp; PC
           </h2>
         </div>
-        <p class="text-xs sm:text-sm text-[var(--text-secondary)] max-w-xl">
+        <p class="text-xs text-[var(--text-secondary)] max-w-xl">
           Engineered for hardware technicians, gamers, and MacBook / PC users to verify switch actuation, inspect JavaScript keycodes, and detect mechanical key chatter with zero latency.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <article class="apple-card p-5 flex flex-col gap-2">
-          <div class="flex items-center gap-2.5">
-            <span class="w-7 h-7 rounded-lg bg-blue-500/15 text-[var(--accent-blue)] flex items-center justify-center font-bold text-sm">⌘</span>
-            <h3 class="text-sm font-semibold">True Apple macOS &amp; Windows Mapping</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+        <article class="apple-card p-4 flex flex-col gap-1.5">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-md bg-blue-500/15 text-[var(--accent-blue)] flex items-center justify-center font-bold text-xs">⌘</span>
+            <h3 class="text-xs sm:text-sm font-semibold">True Apple macOS &amp; Windows Mapping</h3>
           </div>
           <p class="text-xs leading-relaxed text-[var(--text-secondary)]">
-            Test both the <strong>Full-Size (100%) Apple Magic Keyboard with Numeric Keypad</strong> and the <strong>75% Compact MacBook layout</strong> featuring inverted-T half-height arrow keys. Switch seamlessly between macOS modifier legends (<code>⌘ Command</code>, <code>⌥ Option</code>, <code>⌃ Control</code>) and standard Windows PC keys.
+            Test both the <strong>Full-Size (100%) Apple Magic Keyboard with Numeric Keypad</strong> and the <strong>75% Compact MacBook layout</strong>. Switch seamlessly between macOS modifier legends (<code>⌘ Command</code>, <code>⌥ Option</code>, <code>⌃ Control</code>, <code>Delete</code>) and Windows (<code>⊞ Win</code>, <code>Alt</code>, <code>Ctrl</code>, <code>Backspace</code>, <code>Enter</code>).
           </p>
         </article>
 
-        <article class="apple-card p-5 flex flex-col gap-2">
-          <div class="flex items-center gap-2.5">
-            <span class="w-7 h-7 rounded-lg bg-emerald-500/15 text-[var(--accent-green)] flex items-center justify-center font-bold text-sm">⚡</span>
-            <h3 class="text-sm font-semibold">Switch Telemetry &amp; Key Chatter Detector</h3>
+        <article class="apple-card p-4 flex flex-col gap-1.5">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-md bg-emerald-500/15 text-[var(--accent-green)] flex items-center justify-center font-bold text-xs">⚡</span>
+            <h3 class="text-xs sm:text-sm font-semibold">Switch Telemetry &amp; Key Chatter Detector</h3>
           </div>
           <p class="text-xs leading-relaxed text-[var(--text-secondary)]">
             Failing mechanical or scissor switches often suffer from <strong>key chatter (switch bounce)</strong>—registering double or triple presses from a single actuation. Our sub-millisecond timer measures hold dwell duration and flags any key that re-triggers within <strong>&lt;15ms</strong>.
           </p>
         </article>
 
-        <article class="apple-card p-5 flex flex-col gap-2">
-          <div class="flex items-center gap-2.5">
-            <span class="w-7 h-7 rounded-lg bg-amber-500/15 text-[var(--accent-amber)] flex items-center justify-center font-bold text-sm">∞</span>
-            <h3 class="text-sm font-semibold">N-Key Rollover (NKRO) &amp; Anti-Ghosting</h3>
+        <article class="apple-card p-4 flex flex-col gap-1.5">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-md bg-amber-500/15 text-[var(--accent-amber)] flex items-center justify-center font-bold text-xs">∞</span>
+            <h3 class="text-xs sm:text-sm font-semibold">N-Key Rollover (NKRO) &amp; Anti-Ghosting</h3>
           </div>
           <p class="text-xs leading-relaxed text-[var(--text-secondary)]">
             Verify whether your USB or Bluetooth keyboard supports <strong>6-Key Rollover (6KRO)</strong> or full <strong>N-Key Rollover (NKRO)</strong>. Hold down multiple keys across different matrix rows to confirm no keys are blocked or "ghosted" during fast typing or gaming.
@@ -694,32 +703,32 @@
         </article>
       </div>
 
-      <div class="apple-card p-5 sm:p-6">
-        <div class="flex items-center justify-between mb-4">
+      <div class="apple-card p-4 sm:p-5">
+        <div class="flex items-center justify-between mb-3">
           <div>
-            <h2 class="text-base sm:text-lg font-bold tracking-tight">Frequently Asked Questions (FAQ)</h2>
-            <p class="text-xs text-[var(--text-secondary)]">Structured with Schema.org <code>FAQPage</code> JSON-LD for Google Search Rich Snippets</p>
+            <h2 class="text-sm sm:text-base font-bold tracking-tight">Frequently Asked Questions (FAQ)</h2>
+            <p class="text-[11px] text-[var(--text-secondary)]">Structured with Schema.org <code>FAQPage</code> JSON-LD for Google Search Rich Snippets</p>
           </div>
-          <span class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-emerald-500/15 text-[var(--accent-green)] font-semibold">Schema Verified ✓</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/15 text-[var(--accent-green)] font-semibold">Schema Verified ✓</span>
         </div>
 
         <div class="divide-y divide-[var(--border-glass)]">
-          <details class="faq-item group py-3.5" open>
+          <details class="faq-item group py-2.5" open>
             <summary class="flex items-center justify-between cursor-pointer font-semibold text-xs sm:text-sm">
               <span>How do I test my Mac or Windows keyboard keys online?</span>
-              <svg class="faq-chevron w-4 h-4 text-[var(--text-secondary)] transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+              <svg class="faq-chevron w-3.5 h-3.5 text-[var(--text-secondary)] transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
             </summary>
-            <p class="mt-2 text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
+            <p class="mt-1.5 text-xs text-[var(--text-secondary)] leading-relaxed">
               Simply press any physical key on your keyboard while on this page. The corresponding keycap lights up in bright system blue while held down and turns emerald green once verified working.
             </p>
           </details>
 
-          <details class="faq-item group py-3.5">
+          <details class="faq-item group py-2.5">
             <summary class="flex items-center justify-between cursor-pointer font-semibold text-xs sm:text-sm">
               <span>What is Key Chatter (Switch Bounce) and how does the detector work?</span>
-              <svg class="faq-chevron w-4 h-4 text-[var(--text-secondary)] transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+              <svg class="faq-chevron w-3.5 h-3.5 text-[var(--text-secondary)] transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
             </summary>
-            <p class="mt-2 text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
+            <p class="mt-1.5 text-xs text-[var(--text-secondary)] leading-relaxed">
               Key chatter occurs when dust, oxidation, or leaf fatigue inside a mechanical or scissor switch causes a single press to register multiple times rapidly. Our telemetry engine tracks the timestamp between key release and actuation—highlighting the key in amber if a bounce occurs in under 15ms.
             </p>
           </details>
@@ -730,13 +739,14 @@
   </main>
 
   <!-- Open-Source Footer -->
-  <footer class="relative z-20 max-w-[1380px] w-full mx-auto px-4 sm:px-6 mt-10 mb-8">
-    <div class="apple-card p-6 sm:p-8 flex flex-col gap-6 border border-[var(--border-glass)]">
+  <footer class="relative z-20 max-w-[1440px] w-full mx-auto px-4 sm:px-6 mt-8 mb-6">
+    <div class="apple-card p-5 sm:p-6 flex flex-col gap-4 border border-[var(--border-glass)]">
       
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-[var(--border-glass)]">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[var(--border-glass)]">
         <div class="flex flex-col sm:flex-row sm:items-center gap-3">
           <div class="flex items-center gap-2">
-            <a href="https://github.com/MekdadGhazal" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 text-[var(--text-primary)] flex items-center justify-center transition" aria-label="Mekdad Ghazal on GitHub">
+            <a href="https://github.com/MekdadGhazal/KeyboardTester" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 text-[var(--text-primary)] flex items-center justify-center transition" aria-label="KeyboardTester Repository on GitHub">
+              <!-- GitHub SVG -->
               <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
               </svg>
@@ -754,18 +764,18 @@
           </span>
         </div>
 
-        <div class="flex flex-wrap items-center gap-2.5">
+        <div class="flex flex-wrap items-center gap-2">
           <a
-            href="https://github.com/MekdadGhazal"
+            href="https://github.com/MekdadGhazal/KeyboardTester"
             target="_blank"
             rel="noopener noreferrer"
-            class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-[#0071e3] hover:bg-[#0077ed] text-white flex items-center gap-1.5 transition shadow-sm"
+            class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#0071e3] hover:bg-[#0077ed] text-white flex items-center gap-1.5 transition shadow-sm"
           >
-            <span>Follow @MekdadGhazal</span>
+            <span>GitHub Repository</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
           </a>
           <a
-            href="https://github.com/MekdadGhazal"
+            href="https://github.com/MekdadGhazal/KeyboardTester"
             target="_blank"
             rel="noopener noreferrer"
             class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15 text-[var(--text-primary)] flex items-center gap-1.5 transition border border-[var(--border-glass)]"
@@ -777,7 +787,7 @@
 
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-[var(--text-secondary)]">
         <div>
-          <span>Crafted with precision by </span>
+          <span>Crafted by </span>
           <a
             href="https://github.com/MekdadGhazal"
             target="_blank"
@@ -790,9 +800,11 @@
           <span>Zero Server Logs (100% Client-Side Privacy)</span>
         </div>
 
-        <div class="flex items-center gap-4">
-          <button onclick="toggleSEOModal(true)" class="hover:text-[var(--text-primary)] underline underline-offset-4 transition">
-            Google Search Console Setup
+        <!-- Integrated SEO / GSC Trigger & Navigation inside Footer -->
+        <div class="flex items-center gap-3">
+          <button onclick="toggleSEOModal(true)" class="text-[var(--accent-blue)] hover:underline transition flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <span>Google Search Console Setup</span>
           </button>
           <span>•</span>
           <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hover:text-[var(--text-primary)] underline underline-offset-4 transition">
@@ -813,7 +825,7 @@
             <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md bg-blue-500/20 text-[var(--accent-blue)]">Google Search Console Ready</span>
             <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md bg-emerald-500/20 text-[var(--accent-green)]">100/100 SEO Architecture</span>
           </div>
-          <h2 id="seo-modal-title" class="text-lg sm:text-xl font-bold mt-1">SEO &amp; Google Search Console Configuration Hub</h2>
+          <h2 id="seo-modal-title" class="text-base sm:text-lg font-bold mt-1">SEO &amp; Google Search Console Configuration Hub</h2>
           <p class="text-xs text-[var(--text-secondary)] mt-0.5">
             Enter your domain and GSC token to generate <code>sitemap.xml</code> and <code>robots.txt</code>.
           </p>
@@ -821,20 +833,20 @@
         <button onclick="toggleSEOModal(false)" class="w-8 h-8 rounded-full bg-black/10 dark:bg-white/10 flex items-center justify-center text-sm hover:opacity-80 transition" aria-label="Close modal">✕</button>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4">
         <div>
-          <label for="gsc-domain-input" class="block text-xs font-semibold mb-1.5">1. Website URL (Canonical Domain)</label>
+          <label for="gsc-domain-input" class="block text-xs font-semibold mb-1">1. Website URL (Canonical Domain)</label>
           <input
             id="gsc-domain-input"
             type="url"
-            value="https://yourdomain.com/"
+            value="https://keyboardtester.example.com/"
             oninput="updateSEOGenerators()"
             placeholder="https://yourdomain.com/"
             class="w-full px-3 py-2 rounded-lg text-xs font-mono bg-black/5 dark:bg-white/10 border border-[var(--border-glass)] focus:outline-none focus:border-[var(--accent-blue)]"
           >
         </div>
         <div>
-          <label for="gsc-token-input" class="block text-xs font-semibold mb-1.5">2. GSC Verification Token</label>
+          <label for="gsc-token-input" class="block text-xs font-semibold mb-1">2. GSC Verification Token</label>
           <input
             id="gsc-token-input"
             type="text"
@@ -846,22 +858,18 @@
         </div>
       </div>
 
-      <div class="space-y-4">
-        <div class="p-4 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--border-glass)]">
-          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-            <div>
-              <span class="text-xs font-bold">A. Google Verification Meta Tag</span>
-            </div>
+      <div class="space-y-3.5">
+        <div class="p-3.5 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--border-glass)]">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+            <span class="text-xs font-bold">A. Google Verification Meta Tag</span>
             <button onclick="copyGeneratedText('gsc-meta-output')" class="px-2.5 py-1 rounded-md bg-[#0071e3] text-white text-[11px] font-semibold hover:opacity-90">Copy Tag</button>
           </div>
           <pre id="gsc-meta-output" class="p-2.5 rounded-lg bg-black/10 dark:bg-black/40 font-mono text-[11px] overflow-x-auto select-all"></pre>
         </div>
 
-        <div class="p-4 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--border-glass)]">
-          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-            <div>
-              <span class="text-xs font-bold">B. <code>sitemap.xml</code></span>
-            </div>
+        <div class="p-3.5 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--border-glass)]">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+            <span class="text-xs font-bold">B. <code>sitemap.xml</code></span>
             <div class="flex items-center gap-2">
               <button onclick="copyGeneratedText('gsc-sitemap-output')" class="px-2.5 py-1 rounded-md bg-[#0071e3] text-white text-[11px] font-semibold hover:opacity-90">Copy XML</button>
               <button onclick="downloadSEOFile('sitemap.xml', 'gsc-sitemap-output', 'application/xml')" class="px-2.5 py-1 rounded-md bg-black/10 dark:bg-white/15 text-[11px] font-semibold hover:opacity-90">⬇ Download sitemap.xml</button>
@@ -870,11 +878,9 @@
           <pre id="gsc-sitemap-output" class="p-2.5 rounded-lg bg-black/10 dark:bg-black/40 font-mono text-[11px] overflow-x-auto select-all"></pre>
         </div>
 
-        <div class="p-4 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--border-glass)]">
-          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-            <div>
-              <span class="text-xs font-bold">C. <code>robots.txt</code></span>
-            </div>
+        <div class="p-3.5 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--border-glass)]">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+            <span class="text-xs font-bold">C. <code>robots.txt</code></span>
             <div class="flex items-center gap-2">
               <button onclick="copyGeneratedText('gsc-robots-output')" class="px-2.5 py-1 rounded-md bg-[#0071e3] text-white text-[11px] font-semibold hover:opacity-90">Copy robots.txt</button>
               <button onclick="downloadSEOFile('robots.txt', 'gsc-robots-output', 'text/plain')" class="px-2.5 py-1 rounded-md bg-black/10 dark:bg-white/15 text-[11px] font-semibold hover:opacity-90">⬇ Download robots.txt</button>
@@ -883,31 +889,32 @@
           <pre id="gsc-robots-output" class="p-2.5 rounded-lg bg-black/10 dark:bg-black/40 font-mono text-[11px] overflow-x-auto select-all"></pre>
         </div>
       </div>
-      <div id="copy-toast" class="mt-3 text-center text-xs text-[var(--accent-green)] font-semibold opacity-0 transition-opacity">Copied to clipboard!</div>
+      <div id="copy-toast" class="mt-2 text-center text-xs text-[var(--accent-green)] font-semibold opacity-0 transition-opacity">Copied to clipboard!</div>
     </div>
   </div>
 
   <script>
     /*************************************************************************
-     * 1. KEYBOARD LAYOUT DEFINITIONS (COMPACT 75% & FULL 100%)
+     * 1. KEYBOARD LAYOUT DEFINITIONS (75% COMPACT & 100% FULL WITH NUMPAD)
      *************************************************************************/
+    // Base 75% Compact Layout (Left Main Block)
     const COMPACT_LAYOUT = [
       // Row 1: Function Row
       [
-        { code: "Escape", label: "esc", w: 1.5 },
-        { code: "F1", label: "F1", sub: "🔅" },
-        { code: "F2", label: "F2", sub: "🔆" },
-        { code: "F3", label: "F3", sub: "🪟" },
-        { code: "F4", label: "F4", sub: "🔍" },
-        { code: "F5", label: "F5", sub: "🎤" },
-        { code: "F6", label: "F6", sub: "🌙" },
-        { code: "F7", label: "F7", sub: "⏮" },
-        { code: "F8", label: "F8", sub: "⏯" },
-        { code: "F9", label: "F9", sub: "⏭" },
-        { code: "F10", label: "F10", sub: "🔇" },
-        { code: "F11", label: "F11", sub: "🔉" },
-        { code: "F12", label: "F12", sub: "🔊" },
-        { code: "Power", label: "⌽", w: 1 }
+        { code: "Escape", macLabel: "esc", winLabel: "Esc", w: 1.5 },
+        { code: "F1", macLabel: "F1", winLabel: "F1", sub: "🔅" },
+        { code: "F2", macLabel: "F2", winLabel: "F2", sub: "🔆" },
+        { code: "F3", macLabel: "F3", winLabel: "F3", sub: "🪟" },
+        { code: "F4", macLabel: "F4", winLabel: "F4", sub: "🔍" },
+        { code: "F5", macLabel: "F5", winLabel: "F5", sub: "🎤" },
+        { code: "F6", macLabel: "F6", winLabel: "F6", sub: "🌙" },
+        { code: "F7", macLabel: "F7", winLabel: "F7", sub: "⏮" },
+        { code: "F8", macLabel: "F8", winLabel: "F8", sub: "⏯" },
+        { code: "F9", macLabel: "F9", winLabel: "F9", sub: "⏭" },
+        { code: "F10", macLabel: "F10", winLabel: "F10", sub: "🔇" },
+        { code: "F11", macLabel: "F11", winLabel: "F11", sub: "🔉" },
+        { code: "F12", macLabel: "F12", winLabel: "F12", sub: "🔊" },
+        { code: "Power", macLabel: "⌽", winLabel: "Power", w: 1 }
       ],
       // Row 2: Numbers
       [
@@ -924,11 +931,11 @@
         { code: "Digit0", label: "0", sub: ")" },
         { code: "Minus", label: "-", sub: "_" },
         { code: "Equal", label: "=", sub: "+" },
-        { code: "Backspace", label: "delete", w: 1.5 }
+        { code: "Backspace", macLabel: "delete", winLabel: "Backspace", w: 1.5 }
       ],
       // Row 3: QWERTY
       [
-        { code: "Tab", label: "tab", w: 1.5 },
+        { code: "Tab", macLabel: "tab", winLabel: "Tab", w: 1.5 },
         { code: "KeyQ", label: "Q" }, { code: "KeyW", label: "W" },
         { code: "KeyE", label: "E" }, { code: "KeyR", label: "R" },
         { code: "KeyT", label: "T" }, { code: "KeyY", label: "Y" },
@@ -940,90 +947,122 @@
       ],
       // Row 4: Home row
       [
-        { code: "CapsLock", label: "caps lock", w: 1.75 },
+        { code: "CapsLock", macLabel: "caps lock", winLabel: "Caps", w: 1.75 },
         { code: "KeyA", label: "A" }, { code: "KeyS", label: "S" },
         { code: "KeyD", label: "D" }, { code: "KeyF", label: "F" },
         { code: "KeyG", label: "G" }, { code: "KeyH", label: "H" },
         { code: "KeyJ", label: "J" }, { code: "KeyK", label: "K" },
         { code: "KeyL", label: "L" }, { code: "Semicolon", label: ";", sub: ":" },
         { code: "Quote", label: "'", sub: "\"" },
-        { code: "Enter", label: "return", w: 1.75 }
+        { code: "Enter", macLabel: "return", winLabel: "Enter", w: 1.75 }
       ],
       // Row 5: Shift row
       [
-        { code: "ShiftLeft", label: "shift", w: 2.25 },
+        { code: "ShiftLeft", macLabel: "shift", winLabel: "Shift", w: 2.25 },
         { code: "KeyZ", label: "Z" }, { code: "KeyX", label: "X" },
         { code: "KeyC", label: "C" }, { code: "KeyV", label: "V" },
         { code: "KeyB", label: "B" }, { code: "KeyN", label: "N" },
         { code: "KeyM", label: "M" }, { code: "Comma", label: ",", sub: "<" },
         { code: "Period", label: ".", sub: ">" }, { code: "Slash", label: "/", sub: "?" },
-        { code: "ShiftRight", label: "shift", w: 2.25 }
+        { code: "ShiftRight", macLabel: "shift", winLabel: "Shift", w: 2.25 }
       ],
-      // Row 6: Bottom modifiers & Inverted-T Arrows
+      // Row 6: Bottom row (Modifiers + Inverted-T Half-Height Arrows for Compact Mode)
       [
         { code: "Fn", label: "fn", sub: "🌐", w: 1 },
-        { code: "ControlLeft", label: "control", macLabel: "⌃ control", winLabel: "Ctrl", w: 1 },
-        { code: "AltLeft", label: "option", macLabel: "⌥ option", winLabel: "Alt", w: 1.25 },
-        { code: "MetaLeft", label: "command", macLabel: "⌘ command", winLabel: "⊞ Win", w: 1.35 },
+        { code: "ControlLeft", macLabel: "⌃ control", winLabel: "Ctrl", w: 1 },
+        { code: "AltLeft", macLabel: "⌥ option", winLabel: "Alt", w: 1.25 },
+        { code: "MetaLeft", macLabel: "⌘ command", winLabel: "⊞ Win", w: 1.35 },
         { code: "Space", label: "", w: 5.2 },
-        { code: "MetaRight", label: "command", macLabel: "⌘ command", winLabel: "⊞ Win", w: 1.35 },
-        { code: "AltRight", label: "option", macLabel: "⌥ option", winLabel: "Alt Gr", w: 1.25 },
-        { code: "ArrowLeft", label: "◀", w: 1, halfHeight: true },
+        { code: "MetaRight", macLabel: "⌘ command", winLabel: "⊞ Win", w: 1.35 },
+        { code: "AltRight", macLabel: "⌥ option", winLabel: "Alt Gr", w: 1.25 },
         {
-          type: "vertical-split",
-          w: 1,
-          keys: [
-            { code: "ArrowUp", label: "▲", halfHeight: true },
-            { code: "ArrowDown", label: "▼", halfHeight: true }
-          ]
-        },
-        { code: "ArrowRight", label: "▶", w: 1, halfHeight: true }
+          type: "compact-arrows-group",
+          w: 3
+        }
       ]
     ];
 
-    const FULL_EXTRA_COLUMNS = [
-      // F-row extras + Navigation block + Numpad
+    // Right Extension Blocks for 100% Full-Size Apple Magic Keyboard
+    // Navigation Block (3 columns) + Numeric Keypad Block (4 columns)
+    const FULL_EXTRAS = [
+      // Row 1: F13-F19
       {
-        row: 0,
-        keys: [
-          { code: "F13", label: "F13" }, { code: "F14", label: "F14" }, { code: "F15", label: "F15" },
-          { code: "F16", label: "F16" }, { code: "F17", label: "F17" }, { code: "F18", label: "F18" }, { code: "F19", label: "F19" }
+        nav: [
+          { code: "F13", label: "F13" },
+          { code: "F14", label: "F14" },
+          { code: "F15", label: "F15" }
+        ],
+        numpad: [
+          { code: "F16", label: "F16" },
+          { code: "F17", label: "F17" },
+          { code: "F18", label: "F18" },
+          { code: "F19", label: "F19" }
         ]
       },
+      // Row 2: Nav (fn/home/pgup) + Numpad (clear/=/// *)
       {
-        row: 1,
-        keys: [
-          { code: "Insert", label: "ins" }, { code: "Home", label: "home" }, { code: "PageUp", label: "pg up" },
-          { code: "NumLock", label: "clear" }, { code: "NumpadEqual", label: "=" }, { code: "NumpadDivide", label: "/" }, { code: "NumpadMultiply", label: "*" }
+        nav: [
+          { code: "Insert", macLabel: "help", winLabel: "Ins" },
+          { code: "Home", macLabel: "home", winLabel: "Home" },
+          { code: "PageUp", macLabel: "page up", winLabel: "PgUp" }
+        ],
+        numpad: [
+          { code: "NumLock", macLabel: "clear", winLabel: "Num Lock" },
+          { code: "NumpadEqual", label: "=" },
+          { code: "NumpadDivide", label: "/" },
+          { code: "NumpadMultiply", label: "*" }
         ]
       },
+      // Row 3: Nav (del/end/pgdn) + Numpad (7/8/9/-)
       {
-        row: 2,
-        keys: [
-          { code: "Delete", label: "del" }, { code: "End", label: "end" }, { code: "PageDown", label: "pg dn" },
-          { code: "Numpad7", label: "7" }, { code: "Numpad8", label: "8" }, { code: "Numpad9", label: "9" }, { code: "NumpadSubtract", label: "-" }
+        nav: [
+          { code: "Delete", macLabel: "⌦ del", winLabel: "Del" },
+          { code: "End", macLabel: "end", winLabel: "End" },
+          { code: "PageDown", macLabel: "page down", winLabel: "PgDn" }
+        ],
+        numpad: [
+          { code: "Numpad7", label: "7" },
+          { code: "Numpad8", label: "8" },
+          { code: "Numpad9", label: "9" },
+          { code: "NumpadSubtract", label: "-" }
         ]
       },
+      // Row 4: Nav Spacer + Numpad (4/5/6/+)
       {
-        row: 3,
-        keys: [
-          { spacer: 3 },
-          { code: "Numpad4", label: "4" }, { code: "Numpad5", label: "5" }, { code: "Numpad6", label: "6" }, { code: "NumpadAdd", label: "+" }
+        nav: [
+          { spacer: 3 }
+        ],
+        numpad: [
+          { code: "Numpad4", label: "4" },
+          { code: "Numpad5", label: "5" },
+          { code: "Numpad6", label: "6" },
+          { code: "NumpadAdd", label: "+" }
         ]
       },
+      // Row 5: Nav (ArrowUp) + Numpad (1/2/3/Enter)
       {
-        row: 4,
-        keys: [
-          { spacer: 3 },
-          { code: "Numpad1", label: "1" }, { code: "Numpad2", label: "2" }, { code: "Numpad3", label: "3" },
-          { code: "NumpadEnter", label: "enter", h: 2 }
+        nav: [
+          { spacer: 1 },
+          { code: "ArrowUp", label: "▲" },
+          { spacer: 1 }
+        ],
+        numpad: [
+          { code: "Numpad1", label: "1" },
+          { code: "Numpad2", label: "2" },
+          { code: "Numpad3", label: "3" },
+          { code: "NumpadEnter", macLabel: "enter", winLabel: "Enter" }
         ]
       },
+      // Row 6: Nav (Left/Down/Right) + Numpad (0/.)
       {
-        row: 5,
-        keys: [
-          { spacer: 3 },
-          { code: "Numpad0", label: "0", w: 2 }, { code: "NumpadDecimal", label: "." }
+        nav: [
+          { code: "ArrowLeft", label: "◀" },
+          { code: "ArrowDown", label: "▼" },
+          { code: "ArrowRight", label: "▶" }
+        ],
+        numpad: [
+          { code: "Numpad0", label: "0", w: 2 },
+          { code: "NumpadDecimal", label: "." }
         ]
       }
     ];
@@ -1032,7 +1071,7 @@
      * 2. STATE & DIAGNOSTICS TELEMETRY ENGINE
      *************************************************************************/
     const state = {
-      theme: 'dark',
+      theme: 'dark', // Space Black by default
       layout: 'compact',
       os: 'mac',
       soundProfile: 'scissor',
@@ -1070,7 +1109,6 @@
         const profile = type || state.soundProfile;
 
         if (profile === 'scissor') {
-          // Crispy subtle scissor switch pop
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
           osc.type = 'sine';
@@ -1083,7 +1121,6 @@
           osc.start(now);
           osc.stop(now + 0.04);
         } else if (profile === 'tactile') {
-          // Warm low-pitched thock
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
           osc.type = 'triangle';
@@ -1096,7 +1133,6 @@
           osc.start(now);
           osc.stop(now + 0.06);
         } else if (profile === 'clicky') {
-          // Sharp double-click mechanical simulation
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
           osc.type = 'sawtooth';
@@ -1110,13 +1146,16 @@
           osc.stop(now + 0.03);
         }
       } catch (err) {
-        // Audio error caught silently
+        // silent audio error
       }
     }
 
     /*************************************************************************
      * 4. AUTOMATIC OPERATING SYSTEM (OS) DETECTION
      *************************************************************************/
+    const SVG_APPLE = `<svg class="w-2.5 h-2.5 fill-current inline-block" viewBox="0 0 170 170"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.7-11.64-13.98-6.19-9.57-11.06-20.9-14.61-34-3.56-13.1-5.34-25.07-5.34-35.91 0-14.52 3.65-26.68 10.96-36.48 7.31-9.8 16.59-14.83 27.83-15.09 5.34 0 11.08 1.41 17.21 4.23 6.13 2.82 10.02 4.29 11.67 4.41 1.42 0 5.6-1.54 12.54-4.63 6.94-3.08 12.87-4.46 17.78-4.13 13.68.87 24.36 5.86 32.04 14.98-11.96 7.27-17.84 17.15-17.63 29.64.21 9.87 4.13 18.23 11.75 25.09 7.62 6.85 16.64 10.74 27.06 11.66-2.28 7.07-5.11 14.66-8.5 22.77zM119.22 33.15c0-7.39 2.66-14.42 7.97-21.08 5.31-6.66 11.85-10.74 19.63-12.24.22 1.3.33 2.4.33 3.3 0 7.28-2.83 14.37-8.49 21.28-5.65 6.9-12.33 10.99-20.03 12.27-.11-1.09-.17-2.12-.17-3.1l.76-.43z"/></svg>`;
+    const SVG_WIN = `<svg class="w-2.5 h-2.5 fill-current inline-block" viewBox="0 0 16 16"><path d="M0 2.253L6.5 1.36V7.5H0V2.253zm0 5.997H6.5v6.14l-6.5-.893V8.25zm7.5-6.993L16 0v7.5H7.5V1.257zM16 8.5v7.5l-8.5-1.257V8.5H16z"/></svg>`;
+
     function detectOperatingSystem() {
       let isMac = false;
       if (navigator.userAgentData && navigator.userAgentData.platform) {
@@ -1135,7 +1174,7 @@
       const badgeIcon = document.getElementById('os-detect-icon');
       const badgeText = document.getElementById('os-detect-text');
       if (badgeIcon && badgeText) {
-        badgeIcon.textContent = isMac ? '' : '⊞';
+        badgeIcon.innerHTML = isMac ? SVG_APPLE : SVG_WIN;
         badgeText.textContent = isMac ? 'Auto: macOS' : 'Auto: Windows';
       }
 
@@ -1230,9 +1269,11 @@
      * 6. RENDERING ENGINE (KEYBOARD HTML BUILDER)
      *************************************************************************/
     function getKeyDisplayName(keyDef) {
-      if (state.os === 'mac' && keyDef.macLabel) return keyDef.macLabel;
-      if (state.os === 'win' && keyDef.winLabel) return keyDef.winLabel;
-      return keyDef.label || '';
+      if (state.os === 'mac') {
+        return keyDef.macLabel || keyDef.label || '';
+      } else {
+        return keyDef.winLabel || keyDef.label || '';
+      }
     }
 
     function renderKeyboard() {
@@ -1241,42 +1282,74 @@
       grid.innerHTML = '';
 
       const isFull = state.layout === 'full';
-      const baseUnit = 48; // px width per 1 unit
+      const baseUnit = 48; // px standard key width
+      const gap = 6;       // px standard spacing
 
       COMPACT_LAYOUT.forEach((row, rowIndex) => {
         const rowDiv = document.createElement('div');
-        rowDiv.className = 'flex items-center gap-1.5';
+        rowDiv.className = 'key-row';
 
+        // 1. Render Left Main Block
         row.forEach(keyDef => {
-          if (keyDef.type === 'vertical-split') {
-            const splitWrap = document.createElement('div');
-            splitWrap.className = 'flex flex-col gap-1';
-            splitWrap.style.width = `${(keyDef.w || 1) * baseUnit}px`;
-
-            keyDef.keys.forEach(subKey => {
-              const el = createKeycapElement(subKey, baseUnit);
-              splitWrap.appendChild(el);
-            });
-            rowDiv.appendChild(splitWrap);
+          if (keyDef.type === 'compact-arrows-group') {
+            if (!isFull) {
+              // Compact 75% Inverted-T Half-Height Arrows
+              const arrowBlock = createCompactArrowsBlock(baseUnit, gap);
+              rowDiv.appendChild(arrowBlock);
+            } else {
+              // In Full 100% layout, bottom row has standard modifier extension
+              const ctrlR = createKeycapElement({
+                code: "ControlRight",
+                macLabel: "⌃ control",
+                winLabel: "Ctrl",
+                w: 1.25
+              }, baseUnit, gap);
+              rowDiv.appendChild(ctrlR);
+            }
           } else {
-            const el = createKeycapElement(keyDef, baseUnit);
+            const el = createKeycapElement(keyDef, baseUnit, gap);
             rowDiv.appendChild(el);
           }
         });
 
-        // Append Extra full-size keys if in Full Layout mode
-        if (isFull && FULL_EXTRA_COLUMNS[rowIndex]) {
-          const sep = document.createElement('div');
-          sep.className = 'w-3 shrink-0';
-          rowDiv.appendChild(sep);
+        // 2. Render Full 100% Extra Columns (Nav block + Numpad)
+        if (isFull && FULL_EXTRAS[rowIndex]) {
+          const extra = FULL_EXTRAS[rowIndex];
 
-          FULL_EXTRA_COLUMNS[rowIndex].keys.forEach(extra => {
-            if (extra.spacer) {
+          // Separator gap between main block and Nav block
+          const sep1 = document.createElement('div');
+          sep1.style.width = '14px';
+          sep1.className = 'shrink-0';
+          rowDiv.appendChild(sep1);
+
+          // Nav Block (3 keys wide)
+          extra.nav.forEach(item => {
+            if (item.spacer) {
               const sp = document.createElement('div');
-              sp.style.width = `${extra.spacer * baseUnit + (extra.spacer - 1) * 6}px`;
+              sp.style.width = `${item.spacer * baseUnit + (item.spacer - 1) * gap}px`;
+              sp.className = 'shrink-0';
               rowDiv.appendChild(sp);
             } else {
-              const el = createKeycapElement(extra, baseUnit);
+              const el = createKeycapElement(item, baseUnit, gap);
+              rowDiv.appendChild(el);
+            }
+          });
+
+          // Separator gap between Nav block and Numpad
+          const sep2 = document.createElement('div');
+          sep2.style.width = '14px';
+          sep2.className = 'shrink-0';
+          rowDiv.appendChild(sep2);
+
+          // Numpad Block (4 keys wide)
+          extra.numpad.forEach(item => {
+            if (item.spacer) {
+              const sp = document.createElement('div');
+              sp.style.width = `${item.spacer * baseUnit + (item.spacer - 1) * gap}px`;
+              sp.className = 'shrink-0';
+              rowDiv.appendChild(sp);
+            } else {
+              const el = createKeycapElement(item, baseUnit, gap);
               rowDiv.appendChild(el);
             }
           });
@@ -1291,20 +1364,16 @@
       updateProgressStats();
     }
 
-    function createKeycapElement(keyDef, baseUnit) {
+    function createKeycapElement(keyDef, baseUnit, gap) {
       const btn = document.createElement('div');
-      btn.className = 'keycap';
+      btn.className = 'keycap shrink-0';
       btn.dataset.code = keyDef.code;
 
       const widthUnits = keyDef.w || 1;
-      btn.style.width = `${widthUnits * baseUnit + (widthUnits - 1) * 6}px`;
+      btn.style.width = `${widthUnits * baseUnit + (widthUnits - 1) * gap}px`;
 
       if (keyDef.halfHeight) {
         btn.classList.add('half-height');
-      }
-
-      if (keyDef.h === 2) {
-        btn.style.height = `${2 * baseUnit + 6}px`;
       }
 
       // Check current state
@@ -1341,6 +1410,37 @@
       });
 
       return btn;
+    }
+
+    // Creates the neat MacBook-style inverted-T arrow cluster for 75% compact mode
+    function createCompactArrowsBlock(baseUnit, gap) {
+      const container = document.createElement('div');
+      container.className = 'flex items-end gap-1.5 shrink-0';
+      container.style.width = `${3 * baseUnit + 2 * gap}px`;
+      container.style.height = `${baseUnit}px`;
+
+      // Left Arrow (half height, bottom aligned)
+      const leftKey = createKeycapElement({ code: 'ArrowLeft', label: '◀', w: 1, halfHeight: true }, baseUnit, gap);
+      
+      // Middle Column: Up Arrow stacked over Down Arrow
+      const midCol = document.createElement('div');
+      midCol.className = 'flex flex-col justify-between shrink-0';
+      midCol.style.width = `${baseUnit}px`;
+      midCol.style.height = `${baseUnit}px`;
+
+      const upKey = createKeycapElement({ code: 'ArrowUp', label: '▲', w: 1, halfHeight: true }, baseUnit, gap);
+      const downKey = createKeycapElement({ code: 'ArrowDown', label: '▼', w: 1, halfHeight: true }, baseUnit, gap);
+      midCol.appendChild(upKey);
+      midCol.appendChild(downKey);
+
+      // Right Arrow (half height, bottom aligned)
+      const rightKey = createKeycapElement({ code: 'ArrowRight', label: '▶', w: 1, halfHeight: true }, baseUnit, gap);
+
+      container.appendChild(leftKey);
+      container.appendChild(midCol);
+      container.appendChild(rightKey);
+
+      return container;
     }
 
     function simulateKeyEvent(code, type) {
@@ -1540,7 +1640,7 @@
     }
 
     function updateSEOGenerators() {
-      const rawDomain = (document.getElementById('gsc-domain-input')?.value || 'https://yourdomain.com/').trim();
+      const rawDomain = (document.getElementById('gsc-domain-input')?.value || 'https://keyboardtester.example.com/').trim();
       const cleanDomain = rawDomain.endsWith('/') ? rawDomain : `${rawDomain}/`;
       const token = (document.getElementById('gsc-token-input')?.value || 'YOUR_GSC_VERIFICATION_CODE_HERE').trim();
       const todayISO = new Date().toISOString().split('T')[0];
@@ -1627,7 +1727,7 @@ Sitemap: ${cleanDomain}sitemap.xml`;
 
     window.addEventListener('DOMContentLoaded', () => {
       detectOperatingSystem();
-      setTheme('dark');
+      setTheme('dark'); // Space Black by default
       renderKeyboard();
       updateSEOGenerators();
 
