@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- =====================================================================
+       1. PRIMARY TECHNICAL SEO & GOOGLE SEARCH CONSOLE (GSC) META TAGS
+       ===================================================================== -->
+  <title>Magic Keyboard Tester Online — Test Mac & PC Keys, NKRO, Key Chatter & Latency</title>
+  <meta name="title" content="Magic Keyboard Tester Online — Test Mac & PC Keys, NKRO, Key Chatter & Latency">
+  <meta name="description" content="Free online Apple-style Keyboard Tester & Diagnostics tool. Test Mac Magic Keyboard & Windows PC keys, N-Key Rollover (NKRO), anti-ghosting, switch latency (ms), and key chatter in real time.">
+  <meta name="keywords" content="keyboard tester, magic keyboard tester, macbook keyboard test, online key tester, test keys online, n-key rollover test, nkro test, key chatter detector, switch bounce test, keycode inspector, mechanical keyboard tester, فحص الكيبورد, اختبار لوحة المفاتيح">
+  <meta name="author" content="Mekdad Ghazal">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="theme-color" content="#070913">
+  <link id="seo-canonical-link" rel="canonical" href="https://keyboardtester.example.com/">
+
+  <!-- GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
+  <meta id="gsc-verification-meta" name="google-site-verification" content="YOUR_GSC_VERIFICATION_CODE_HERE">
+
+  <!-- OPEN GRAPH (FACEBOOK / LINKEDIN / DISCORD) -->
+  <meta property="og:type" content="website">
+  <meta id="og-url-meta" property="og:url" content="https://keyboardtester.example.com/">
+  <meta property="og:site_name" content="Magic Keyboard Diagnostics">
+  <meta property="og:title" content="Magic Keyboard Tester Online — Mac & PC Key Diagnostics, NKRO & Latency">
+  <meta property="og:description" content="Test every key on your Apple Magic Keyboard, MacBook, or Windows PC keyboard. Includes N-Key Rollover (NKRO), switch latency telemetry, and <15ms key chatter detection.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ar_AR">
+
+  <!-- TWITTER CARDS -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Magic Keyboard Tester — Apple Style Key, NKRO & Chatter Diagnostics">
+  <meta name="twitter:description" content="Instant browser-based hardware keyboard tester with macOS & Windows layouts, NKRO matrix verification, switch bounce detection, and Web Audio acoustic feedback.">
+
+  <!-- JSON-LD STRUCTURED DATA -->
+  <script id="schema-webapp" type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Magic Keyboard Diagnostics & Online Keyboard Tester",
+    "alternateName": ["Apple Magic Keyboard Tester", "Online NKRO & Key Chatter Tester"],
+    "url": "https://keyboardtester.example.com/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "macOS, Windows, Linux, ChromeOS, iPadOS",
+    "browserRequirements": "Requires JavaScript and a modern HTML5 web browser.",
+    "inLanguage": ["en", "ar"],
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0.00",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Real-time Apple Magic Keyboard (100% Full Size and 75% Compact MacBook) key testing",
+      "macOS (Command, Option, Control) and Windows (Win, Alt, Ctrl) keycap legend switching",
+      "N-Key Rollover (NKRO) and Anti-Ghosting simultaneous keypress matrix counter",
+      "Hardware Switch Telemetry: hold dwell time (ms) and <15ms Key Chatter / bounce detector",
+      "JavaScript Key Event Inspector (event.key, event.code, keyCode, key location)",
+      "Zero-dependency Web Audio API switch sound synthesizer (Scissor, Tactile, Clicky)"
+    ]
+  }
+  </script>
+
+  <script id="schema-faq" type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I test my Mac or Windows keyboard keys online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Simply press any physical key on your keyboard while on this page. The corresponding keycap lights up in blue while held down and turns emerald green once verified."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Key Chatter (Switch Bounce) and how does the detector work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Key chatter occurs when a worn or oxidized mechanical or scissor switch registers multiple rapid keystrokes from a single physical press (<15ms bounce time)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is N-Key Rollover (NKRO) and Keyboard Ghosting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "N-Key Rollover (NKRO) is a keyboard's ability to scan and register multiple keys pressed at the exact same time without matrix ghosting."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg-page: #0a0b10;
+      --bg-card: rgba(22, 24, 34, 0.72);
+      --border-glass: rgba(255, 255, 255, 0.08);
+      --border-glass-strong: rgba(255, 255, 255, 0.16);
+      --chassis-bg: linear-gradient(180deg, #181920 0%, #101116 100%);
+      --chassis-border: #2c2e3a;
+      --chassis-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+      --key-bg: #1c1d25;
+      --key-border: #2a2b36;
+      --key-text: #f0f2f8;
+      --key-subtext: #8e93a6;
+      --key-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      --text-primary: #f5f5f7;
+      --text-secondary: #86868b;
+      --accent-blue: #2997ff;
+      --accent-green: #30d158;
+      --accent-amber: #ff9f0a;
+      --accent-red: #ff453a;
+    }
+
+    [data-theme="light"] {
+      --bg-page: #f5f5f7;
+      --bg-card: rgba(255, 255, 255, 0.75);
+      --border-glass: rgba(0, 0, 0, 0.06);
+      --border-glass-strong: rgba(0, 0, 0, 0.12);
+      --chassis-bg: linear-gradient(180deg, #e3e4e8 0%, #d5d7dc 100%);
+      --chassis-border: #c3c6cd;
+      --chassis-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      --key-bg: #ffffff;
+      --key-border: #d2d4d9;
+      --key-text: #1d1d1f;
+      --key-subtext: #86868b;
+      --key-shadow: 0 2px 4px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.08), inset 0 1px 0 #ffffff;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --accent-blue: #0071e3;
+      --accent-green: #34c759;
+      --accent-amber: #ff9500;
+      --accent-red: #ff3b30;
+    }
+
+    [data-theme="glass"] {
+      --bg-page: #070913;
+      --bg-card: rgba(18, 22, 36, 0.45);
+      --border-glass: rgba(255, 255, 255, 0.14);
+      --border-glass-strong: rgba(255, 255, 255, 0.3);
+      --chassis-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+      --chassis-border: rgba(255, 255, 255, 0.22);
+      --chassis-shadow: 0 40px 90px -20px rgba(0, 0, 0, 0.85), inset 0 1px 2px rgba(255, 255, 255, 0.35);
+      --key-bg: rgba(255, 255, 255, 0.06);
+      --key-border: rgba(255, 255, 255, 0.15);
+      --key-text: #ffffff;
+      --key-subtext: #94a3b8;
+      --key-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+      --text-primary: #ffffff;
+      --text-secondary: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-green: #34d399;
+      --accent-amber: #fbbf24;
+      --accent-red: #f87171;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.35s ease;
+      overflow-x: hidden;
+    }
+
+    .aurora-mesh {
+      position: fixed;
+      inset: -20%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(52, 211, 153, 0.14) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(236, 72, 153, 0.12) 0%, transparent 45%);
+      filter: blur(80px);
+      transform: translate3d(0, 0, 0);
+      animation: auroraFloat 22s ease-in-out infinite alternate;
+    }
+
+    [data-theme="glass"] .aurora-mesh {
+      opacity: 1;
+    }
+
+    @keyframes auroraFloat {
+      0% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.08) translate(2%, 2%) rotate(2deg); }
+      100% { transform: scale(0.96) translate(-2%, -1%) rotate(-2deg); }
+    }
+
+    .apple-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-radius: 18px;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.12);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .apple-pill-bar {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-glass);
+      border-radius: 9999px;
+      padding: 3px;
+      gap: 2px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
+    }
+
+    [data-theme="light"] .apple-pill-bar {
+      background: rgba(0, 0, 0, 0.05);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
+    }
+
+    .apple-pill-btn {
+      font-size: 11.5px;
+      font-weight: 590;
+      padding: 5px 11px;
+      border-radius: 9999px;
+      color: var(--text-secondary);
+      border: 1px solid transparent;
+      background: transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+
+    .apple-pill-btn:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    [data-theme="light"] .apple-pill-btn:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .apple-pill-btn.active {
+      color: var(--text-primary);
+      background: var(--bg-card);
+      border-color: var(--border-glass-strong);
+      box-shadow: 0 2px 8px -1px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
+
+    [data-theme="light"] .apple-pill-btn.active {
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    }
+
+    .os-detected-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: 9999px;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent-blue);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    #keyboard-chassis {
+      background: var(--chassis-bg);
+      border: 1px solid var(--chassis-border);
+      box-shadow: var(--chassis-shadow);
+      border-radius: 24px;
+      padding: 16px;
+      position: relative;
+      transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    [data-theme="glass"] #keyboard-chassis {
+      backdrop-filter: blur(35px);
+      -webkit-backdrop-filter: blur(35px);
+    }
+
+    #keyboard-chassis::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      pointer-events: none;
+      opacity: 0;
+      background: radial-gradient(circle 420px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.12), transparent 80%);
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+
+    [data-theme="glass"] #keyboard-chassis::before {
+      opacity: 1;
+    }
+
+    .key-grid {
+      display: grid;
+      grid-gap: 6px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .keycap {
+      background: var(--key-bg);
+      border: 1px solid var(--key-border);
+      color: var(--key-text);
+      box-shadow: var(--key-shadow);
+      border-radius: 7px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 500;
+      height: 48px;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.08s ease, background-color 0.15s ease, box-shadow 0.12s ease, border-color 0.15s ease;
+      touch-action: manipulation;
+    }
+
+    [data-theme="glass"] .keycap {
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .keycap.half-height {
+      height: 21px;
+      font-size: 10px;
+    }
+
+    .keycap .sub-label {
+      font-size: 9px;
+      color: var(--key-subtext);
+      line-height: 1;
+      margin-bottom: 2px;
+      pointer-events: none;
+    }
+
+    .keycap .main-label {
+      line-height: 1.1;
+      pointer-events: none;
+    }
+
+    .keycap.pressed {
+      transform: translateY(2px) scale(0.985);
+      background: var(--accent-blue) !important;
+      color: #ffffff !important;
+      border-color: rgba(255, 255, 255, 0.5) !important;
+      box-shadow: 0 0 16px var(--accent-blue), inset 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    .keycap.pressed .sub-label {
+      color: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .keycap.tested {
+      background: rgba(52, 199, 89, 0.16) !important;
+      color: var(--key-text);
+      border-color: rgba(52, 199, 89, 0.45) !important;
+      box-shadow: inset 0 0 8px rgba(52, 199, 89, 0.15);
+    }
+
+    .keycap.chattered {
+      background: rgba(255, 149, 0, 0.22) !important;
+      border-color: var(--accent-amber) !important;
+      animation: pulseChatter 1.5s infinite;
+    }
+
+    @keyframes pulseChatter {
+      0%, 100% { box-shadow: 0 0 4px var(--accent-amber); }
+      50% { box-shadow: 0 0 14px var(--accent-amber); }
+    }
+
+    .stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    @keyframes pillPop {
+      0% { transform: scale(0.85); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .history-pill {
+      animation: pillPop 0.16s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    details.faq-item > summary {
+      list-style: none;
+    }
+    details.faq-item > summary::-webkit-details-marker {
+      display: none;
+    }
+    details.faq-item[open] .faq-chevron {
+      transform: rotate(180deg);
+    }
+
+    .modal-backdrop {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    @media (max-width: 1200px) {
+      #keyboard-scroll-wrap {
+        overflow-x: auto;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <!-- Ambient Dynamic visionOS Aurora Mesh Background -->
+  <div class="aurora-mesh" aria-hidden="true"></div>
+
+  <!-- Header & Navigation Bar -->
+  <header class="relative z-20 border-b border-[var(--border-glass)] backdrop-blur-2xl bg-[var(--bg-page)]/80 sticky top-0 transition-colors">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand & Status Group -->
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0071e3] to-[#2997ff] flex items-center justify-center text-white font-bold text-sm shadow-md shadow-blue-500/20">
+          
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-sm font-semibold tracking-tight text-[var(--text-primary)]">Magic Keyboard Diagnostics</h1>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-[var(--accent-green)] border border-emerald-500/30">PRO</span>
+            <!-- Live Auto OS Detection Badge -->
+            <span id="os-detect-badge" class="os-detected-badge" title="Automatically detected operating system">
+              <span id="os-detect-icon"></span>
+              <span id="os-detect-text">Auto: macOS</span>
+            </span>
+          </div>
+          <p class="text-[11px] text-[var(--text-secondary)] hidden sm:block">Hardware Telemetry, NKRO Matrix &amp; Switch Bounce Lab</p>
+        </div>
+      </div>
+
+      <!-- Redesigned Apple macOS-Style Segmented Controls Bar -->
+      <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
+        
+        <!-- Layout Switcher (Compact 75% | Full 100%) -->
+        <div class="apple-pill-bar" role="group" aria-label="Keyboard Layout Selector">
+          <button id="btn-layout-compact" class="apple-pill-btn active" onclick="setLayout('compact')">
+            <span>75% Compact</span>
+          </button>
+          <button id="btn-layout-full" class="apple-pill-btn" onclick="setLayout('full')">
+            <span>100% Full Size</span>
+          </button>
+        </div>
+
+        <!-- OS Key Modifier Legend Switcher (macOS | Windows) -->
+        <div class="apple-pill-bar" role="group" aria-label="OS Modifier Legends">
+          <button id="btn-os-mac" class="apple-pill-btn active" onclick="setOSLegends('mac')">
+            <span> macOS</span>
+          </button>
+          <button id="btn-os-win" class="apple-pill-btn" onclick="setOSLegends('win')">
+            <span>⊞ Windows</span>
+          </button>
+        </div>
+
+        <!-- Switch Sound Profile Selector -->
+        <div class="apple-pill-bar" role="group" aria-label="Audio Switch Profile">
+          <button id="btn-sound-scissor" class="apple-pill-btn active" onclick="setSoundProfile('scissor')">
+            <span>✂️ Scissor</span>
+          </button>
+          <button id="btn-sound-tactile" class="apple-pill-btn" onclick="setSoundProfile('tactile')">
+            <span>🕹️ Tactile</span>
+          </button>
+          <button id="btn-sound-clicky" class="apple-pill-btn" onclick="setSoundProfile('clicky')">
+            <span>⚡ Clicky</span>
+          </button>
+          <button id="btn-sound-mute" class="apple-pill-btn" onclick="setSoundProfile('mute')" title="Mute Switch Audio">
+            <span>🔇</span>
+          </button>
+        </div>
+
+        <!-- Appearance Finish Switcher -->
+        <div class="apple-pill-bar" role="group" aria-label="Chassis Appearance Theme">
+          <button id="btn-theme-dark" class="apple-pill-btn active" onclick="setTheme('dark')">
+            <span>🌙 Space Black</span>
+          </button>
+          <button id="btn-theme-light" class="apple-pill-btn" onclick="setTheme('light')">
+            <span>☀️ Silver</span>
+          </button>
+          <button id="btn-theme-glass" class="apple-pill-btn" onclick="setTheme('glass')">
+            <span>✨ Glass</span>
+          </button>
+        </div>
+
+        <!-- SEO & Google Search Console Hub Trigger -->
+        <button onclick="toggleSEOModal(true)" class="apple-pill-btn border border-[var(--accent-blue)]/30 text-[var(--accent-blue)] bg-[var(--accent-blue)]/10 hover:bg-[var(--accent-blue)]/20 transition" title="Open Google Search Console & SEO Configuration Hub">
+          <span>🔍 SEO &amp; GSC</span>
+        </button>
+
+        <!-- Reset Diagnostics Button -->
+        <button onclick="resetDiagnostics()" class="apple-pill-btn border border-[var(--accent-red)]/30 text-[var(--accent-red)] bg-[var(--accent-red)]/10 hover:bg-[var(--accent-red)]/20 transition" title="Reset all tested keys and counters">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          <span>Reset</span>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace Container -->
+  <main class="relative z-10 max-w-[1380px] w-full mx-auto px-4 sm:px-6 pt-5 flex-1 flex flex-col gap-4">
+    
+    <!-- Bento Diagnostics Dashboard -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      
+      <!-- Card 1: Last Pressed Key Inspector -->
+      <div class="apple-card p-4 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-xs text-[var(--text-secondary)]">
+          <span class="font-medium">Active Key Inspector</span>
+          <span id="key-location-badge" class="px-2 py-0.5 rounded-full text-[10px] bg-white/10 text-[var(--text-secondary)]">Standard</span>
+        </div>
+        <div class="my-2">
+          <div id="inspector-main-key" class="text-2xl font-bold font-mono tracking-tight text-[var(--text-primary)] truncate">—</div>
+          <div class="text-[11px] font-mono text-[var(--text-secondary)] flex items-center gap-2 mt-0.5">
+            <span>Code: <strong id="inspector-code" class="text-[var(--text-primary)]">—</strong></span>
+            <span>•</span>
+            <span>KeyCode: <strong id="inspector-keycode" class="text-[var(--text-primary)]">—</strong></span>
+          </div>
+        </div>
+        <div class="text-[10px] text-[var(--text-secondary)] border-t border-[var(--border-glass)] pt-2 flex items-center justify-between">
+          <span>Dwell: <strong id="inspector-dwell" class="text-[var(--accent-blue)]">0 ms</strong></span>
+          <span id="chatter-indicator" class="text-[var(--accent-amber)] font-medium hidden">⚠️ Bounce &lt;15ms</span>
+        </div>
+      </div>
+
+      <!-- Card 2: NKRO & Anti-Ghosting Meter -->
+      <div class="apple-card p-4 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-xs text-[var(--text-secondary)]">
+          <span class="font-medium">Simultaneous (NKRO)</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] bg-blue-500/15 text-[var(--accent-blue)] font-mono">Real-time</span>
+        </div>
+        <div class="my-2 flex items-baseline gap-2">
+          <div id="active-keys-count" class="text-3xl font-extrabold font-mono text-[var(--accent-blue)]">0</div>
+          <span class="text-xs text-[var(--text-secondary)]">active / <strong id="peak-kro-count" class="text-[var(--text-primary)] font-mono">0</strong> peak</span>
+        </div>
+        <div class="text-[10px] text-[var(--text-secondary)] border-t border-[var(--border-glass)] pt-2 flex items-center justify-between">
+          <span>Anti-Ghosting Matrix:</span>
+          <span id="nkro-status-badge" class="text-[var(--accent-green)] font-semibold">100% Clean</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Switch Coverage Progress -->
+      <div class="apple-card p-4 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-xs text-[var(--text-secondary)]">
+          <span class="font-medium">Switch Test Coverage</span>
+          <span id="coverage-percent" class="font-mono text-xs font-bold text-[var(--accent-green)]">0%</span>
+        </div>
+        <div class="my-2">
+          <div class="flex items-baseline gap-1.5">
+            <span id="tested-count" class="text-2xl font-bold font-mono">0</span>
+            <span class="text-xs text-[var(--text-secondary)]">/ <span id="total-keys-count">79</span> tested</span>
+          </div>
+          <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden mt-2">
+            <div id="coverage-bar" class="h-full bg-[var(--accent-green)] transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="text-[10px] text-[var(--text-secondary)] border-t border-[var(--border-glass)] pt-2 flex items-center justify-between">
+          <span>Total keystrokes:</span>
+          <strong id="total-press-count" class="font-mono text-[var(--text-primary)]">0</strong>
+        </div>
+      </div>
+
+      <!-- Card 4: Switch Health & Chatter Log -->
+      <div class="apple-card p-4 flex flex-col justify-between">
+        <div class="flex items-center justify-between text-xs text-[var(--text-secondary)]">
+          <span class="font-medium">Switch Bounce / Chatter</span>
+          <span id="chatter-count-badge" class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/15 text-[var(--accent-green)] font-mono">0 detected</span>
+        </div>
+        <div class="my-2">
+          <div id="chatter-status-text" class="text-sm font-semibold text-[var(--text-primary)]">Normal Contact</div>
+          <div class="text-[11px] text-[var(--text-secondary)] mt-0.5">Threshold: &lt; 15ms release rebound</div>
+        </div>
+        <div class="text-[10px] text-[var(--text-secondary)] border-t border-[var(--border-glass)] pt-2 flex items-center justify-between">
+          <span>Audio Synthesizer:</span>
+          <span id="audio-status-label" class="text-[var(--accent-blue)]">Web Audio Active</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Live Keystroke Stream Pill Bar -->
+    <div class="apple-card px-4 py-2.5 flex items-center gap-3 overflow-hidden text-xs">
+      <div class="flex items-center gap-1.5 shrink-0 text-[var(--text-secondary)] font-medium">
+        <svg class="w-3.5 h-3.5 text-[var(--accent-blue)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Keystroke Stream:</span>
+      </div>
+      <div id="key-stream" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar flex-1 py-0.5">
+        <span class="text-xs text-[var(--text-secondary)] opacity-60">Press any key on your keyboard to begin diagnostic verification...</span>
+      </div>
+    </div>
+
+    <!-- Keyboard Hardware Chassis Container -->
+    <div id="keyboard-scroll-wrap" class="w-full flex justify-center py-2">
+      <div id="keyboard-chassis" class="inline-block transition-all duration-300">
+        <!-- Keycap Matrix dynamically injected here -->
+        <div id="key-grid" class="key-grid"></div>
+      </div>
+    </div>
+
+    <!-- Hardware Diagnostics Help & Quick Controls -->
+    <section class="flex flex-wrap items-center justify-between gap-3 text-xs text-[var(--text-secondary)] px-2">
+      <div class="flex items-center gap-3">
+        <label class="flex items-center gap-2 cursor-pointer select-none">
+          <input type="checkbox" id="prevent-default-toggle" checked class="rounded border-gray-600 text-blue-500 focus:ring-0">
+          <span>Prevent browser shortcut defaults (Tab, F1-F12, Space scroll)</span>
+        </label>
+        <span>•</span>
+        <button onclick="markAllTestedDemo()" class="hover:text-[var(--text-primary)] underline transition">Mark all tested (Demo)</button>
+      </div>
+      <div class="text-right">
+        <span>Tip: Hold multiple keys simultaneously to test your keyboard's N-Key Rollover (NKRO) matrix.</span>
+      </div>
+    </section>
+
+    <!-- Semantic SEO Content & FAQ -->
+    <section aria-labelledby="seo-guide-heading" class="mt-8 pt-6 border-t border-[var(--border-glass)] flex flex-col gap-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <span class="text-[11px] font-semibold uppercase tracking-widest text-[var(--accent-blue)]">Hardware Diagnostics Guide</span>
+          <h2 id="seo-guide-heading" class="text-xl sm:text-2xl font-bold tracking-tight mt-1">
+            Professional Online Keyboard Tester for Apple Magic Keyboard &amp; PC
+          </h2>
+        </div>
+        <p class="text-xs sm:text-sm text-[var(--text-secondary)] max-w-xl">
+          Engineered for hardware technicians, gamers, and MacBook / PC users to verify switch actuation, inspect JavaScript keycodes, and detect mechanical key chatter with zero latency.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <article class="apple-card p-5 flex flex-col gap-2">
+          <div class="flex items-center gap-2.5">
+            <span class="w-7 h-7 rounded-lg bg-blue-500/15 text-[var(--accent-blue)] flex items-center justify-center font-bold text-sm">⌘</span>
+            <h3 class="text-sm font-semibold">True Apple macOS &amp; Windows Mapping</h3>
+          </div>
+          <p class="text-xs leading-relaxed text-[var(--text-secondary)]">
+            Test both the <strong>Full-Size (100%) Apple Magic Keyboard with Numeric Keypad</strong> and the <strong>75% Compact MacBook layout</strong> featuring inverted-T half-height arrow keys. Switch seamlessly between macOS modifier legends (<code>⌘ Command</code>, <code>⌥ Option</code>, <code>⌃ Control</code>) and standard Windows PC keys.
+          </p>
+        </article>
+
+        <article class="apple-card p-5 flex flex-col gap-2">
+          <div class="flex items-center gap-2.5">
+            <span class="w-7 h-7 rounded-lg bg-emerald-500/15 text-[var(--accent-green)] flex items-center justify-center font-bold text-sm">⚡</span>
+            <h3 class="text-sm font-semibold">Switch Telemetry &amp; Key Chatter Detector</h3>
+          </div>
+          <p class="text-xs leading-relaxed text-[var(--text-secondary)]">
+            Failing mechanical or scissor switches often suffer from <strong>key chatter (switch bounce)</strong>—registering double or triple presses from a single actuation. Our sub-millisecond timer measures hold dwell duration and flags any key that re-triggers within <strong>&lt;15ms</strong>.
+          </p>
+        </article>
+
+        <article class="apple-card p-5 flex flex-col gap-2">
+          <div class="flex items-center gap-2.5">
+            <span class="w-7 h-7 rounded-lg bg-amber-500/15 text-[var(--accent-amber)] flex items-center justify-center font-bold text-sm">∞</span>
+            <h3 class="text-sm font-semibold">N-Key Rollover (NKRO) &amp; Anti-Ghosting</h3>
+          </div>
+          <p class="text-xs leading-relaxed text-[var(--text-secondary)]">
+            Verify whether your USB or Bluetooth keyboard supports <strong>6-Key Rollover (6KRO)</strong> or full <strong>N-Key Rollover (NKRO)</strong>. Hold down multiple keys across different matrix rows to confirm no keys are blocked or "ghosted" during fast typing or gaming.
+          </p>
+        </article>
+      </div>
+
+      <div class="apple-card p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold tracking-tight">Frequently Asked Questions (FAQ)</h2>
+            <p class="text-xs text-[var(--text-secondary)]">Structured with Schema.org <code>FAQPage</code> JSON-LD for Google Search Rich Snippets</p>
+          </div>
+          <span class="text-[11px] font-mono px-2.5 py-1 rounded-full bg-emerald-500/15 text-[var(--accent-green)] font-semibold">Schema Verified ✓</span>
+        </div>
+
+        <div class="divide-y divide-[var(--border-glass)]">
+          <details class="faq-item group py-3.5" open>
+            <summary class="flex items-center justify-between cursor-pointer font-semibold text-xs sm:text-sm">
+              <span>How do I test my Mac or Windows keyboard keys online?</span>
+              <svg class="faq-chevron w-4 h-4 text-[var(--text-secondary)] transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-2 text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
+              Simply press any physical key on your keyboard while on this page. The corresponding keycap lights up in bright system blue while held down and turns emerald green once verified working.
+            </p>
+          </details>
+
+          <details class="faq-item group py-3.5">
+            <summary class="flex items-center justify-between cursor-pointer font-semibold text-xs sm:text-sm">
+              <span>What is Key Chatter (Switch Bounce) and how does the detector work?</span>
+              <svg class="faq-chevron w-4 h-4 text-[var(--text-secondary)] transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-2 text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
+              Key chatter occurs when dust, oxidation, or leaf fatigue inside a mechanical or scissor switch causes a single press to register multiple times rapidly. Our telemetry engine tracks the timestamp between key release and actuation—highlighting the key in amber if a bounce occurs in under 15ms.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Open-Source Footer -->
+  <footer class="relative z-20 max-w-[1380px] w-full mx-auto px-4 sm:px-6 mt-10 mb-8">
+    <div class="apple-card p-6 sm:p-8 flex flex-col gap-6 border border-[var(--border-glass)]">
+      
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-[var(--border-glass)]">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+          <div class="flex items-center gap-2">
+            <a href="https://github.com/MekdadGhazal" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 text-[var(--text-primary)] flex items-center justify-center transition" aria-label="Mekdad Ghazal on GitHub">
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+            </a>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-500/15 text-[var(--accent-green)] border border-emerald-500/25">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Open-Source Project
+            </span>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-mono font-semibold bg-black/10 dark:bg-white/10 text-[var(--text-secondary)]">
+              MIT License
+            </span>
+          </div>
+          <span class="text-xs text-[var(--text-secondary)]">
+            Powered by <strong class="text-[var(--text-primary)] font-semibold">GitHub</strong>
+          </span>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5">
+          <a
+            href="https://github.com/MekdadGhazal"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-[#0071e3] hover:bg-[#0077ed] text-white flex items-center gap-1.5 transition shadow-sm"
+          >
+            <span>Follow @MekdadGhazal</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+          <a
+            href="https://github.com/MekdadGhazal"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-black/10 dark:bg-white/10 hover:bg-black/15 dark:hover:bg-white/15 text-[var(--text-primary)] flex items-center gap-1.5 transition border border-[var(--border-glass)]"
+          >
+            <span>★ Star on GitHub</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-[var(--text-secondary)]">
+        <div>
+          <span>Crafted with precision by </span>
+          <a
+            href="https://github.com/MekdadGhazal"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[var(--text-primary)] font-semibold hover:text-[var(--accent-blue)] underline underline-offset-4 transition"
+          >
+            Mekdad Ghazal
+          </a>
+          <span class="mx-1.5 opacity-60">•</span>
+          <span>Zero Server Logs (100% Client-Side Privacy)</span>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <button onclick="toggleSEOModal(true)" class="hover:text-[var(--text-primary)] underline underline-offset-4 transition">
+            Google Search Console Setup
+          </button>
+          <span>•</span>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hover:text-[var(--text-primary)] underline underline-offset-4 transition">
+            Back to Top ↑
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- SEO & Google Search Console Generator Modal -->
+  <div id="seo-gsc-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="seo-modal-title">
+    <div class="apple-card w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 text-[var(--text-primary)] shadow-2xl border border-[var(--border-glass)] bg-[var(--bg-page)]/90 backdrop-blur-2xl">
+      <div class="flex items-start justify-between gap-4 pb-4 border-b border-[var(--border-glass)]">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md bg-blue-500/20 text-[var(--accent-blue)]">Google Search Console Ready</span>
+            <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md bg-emerald-500/20 text-[var(--accent-green)]">100/100 SEO Architecture</span>
+          </div>
+          <h2 id="seo-modal-title" class="text-lg sm:text-xl font-bold mt-1">SEO &amp; Google Search Console Configuration Hub</h2>
+          <p class="text-xs text-[var(--text-secondary)] mt-0.5">
+            Enter your domain and GSC token to generate <code>sitemap.xml</code> and <code>robots.txt</code>.
+          </p>
+        </div>
+        <button onclick="toggleSEOModal(false)" class="w-8 h-8 rounded-full bg-black/10 dark:bg-white/10 flex items-center justify-center text-sm hover:opacity-80 transition" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-5">
+        <div>
+          <label for="gsc-domain-input" class="block text-xs font-semibold mb-1.5">1. Website URL (Canonical Domain)</label>
+          <input
+            id="gsc-domain-input"
+            type="url"
+            value="https://yourdomain.com/"
+            oninput="updateSEOGenerators()"
+            placeholder="https://yourdomain.com/"
+            class="w-full px-3 py-2 rounded-lg text-xs font-mono bg-black/5 dark:bg-white/10 border border-[var(--border-glass)] focus:outline-none focus:border-[var(--accent-blue)]"
+          >
+        </div>
+        <div>
+          <label for="gsc-token-input" class="block text-xs font-semibold mb-1.5">2. GSC Verification Token</label>
+          <input
+            id="gsc-token-input"
+            type="text"
+            value="YOUR_GSC_VERIFICATION_CODE_HERE"
+            oninput="updateSEOGenerators()"
+            placeholder="e.g. dBw5CvburAxi537..."
+            class="w-full px-3 py-2 rounded-lg text-xs font-mono bg-black/5 dark:bg-white/10 border border-[var(--border-glass)] focus:outline-none focus:border-[var(--accent-blue)]"
+          >
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="p-4 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--border-glass)]">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <div>
+              <span class="text-xs font-bold">A. Google Verification Meta Tag</span>
+            </div>
+            <button onclick="copyGeneratedText('gsc-meta-output')" class="px-2.5 py-1 rounded-md bg-[#0071e3] text-white text-[11px] font-semibold hover:opacity-90">Copy Tag</button>
+          </div>
+          <pre id="gsc-meta-output" class="p-2.5 rounded-lg bg-black/10 dark:bg-black/40 font-mono text-[11px] overflow-x-auto select-all"></pre>
+        </div>
+
+        <div class="p-4 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--border-glass)]">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <div>
+              <span class="text-xs font-bold">B. <code>sitemap.xml</code></span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="copyGeneratedText('gsc-sitemap-output')" class="px-2.5 py-1 rounded-md bg-[#0071e3] text-white text-[11px] font-semibold hover:opacity-90">Copy XML</button>
+              <button onclick="downloadSEOFile('sitemap.xml', 'gsc-sitemap-output', 'application/xml')" class="px-2.5 py-1 rounded-md bg-black/10 dark:bg-white/15 text-[11px] font-semibold hover:opacity-90">⬇ Download sitemap.xml</button>
+            </div>
+          </div>
+          <pre id="gsc-sitemap-output" class="p-2.5 rounded-lg bg-black/10 dark:bg-black/40 font-mono text-[11px] overflow-x-auto select-all"></pre>
+        </div>
+
+        <div class="p-4 rounded-xl bg-black/5 dark:bg-white/5 border border-[var(--border-glass)]">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <div>
+              <span class="text-xs font-bold">C. <code>robots.txt</code></span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="copyGeneratedText('gsc-robots-output')" class="px-2.5 py-1 rounded-md bg-[#0071e3] text-white text-[11px] font-semibold hover:opacity-90">Copy robots.txt</button>
+              <button onclick="downloadSEOFile('robots.txt', 'gsc-robots-output', 'text/plain')" class="px-2.5 py-1 rounded-md bg-black/10 dark:bg-white/15 text-[11px] font-semibold hover:opacity-90">⬇ Download robots.txt</button>
+            </div>
+          </div>
+          <pre id="gsc-robots-output" class="p-2.5 rounded-lg bg-black/10 dark:bg-black/40 font-mono text-[11px] overflow-x-auto select-all"></pre>
+        </div>
+      </div>
+      <div id="copy-toast" class="mt-3 text-center text-xs text-[var(--accent-green)] font-semibold opacity-0 transition-opacity">Copied to clipboard!</div>
+    </div>
+  </div>
+
+  <script>
+    /*************************************************************************
+     * 1. KEYBOARD LAYOUT DEFINITIONS (COMPACT 75% & FULL 100%)
+     *************************************************************************/
+    const COMPACT_LAYOUT = [
+      // Row 1: Function Row
+      [
+        { code: "Escape", label: "esc", w: 1.5 },
+        { code: "F1", label: "F1", sub: "🔅" },
+        { code: "F2", label: "F2", sub: "🔆" },
+        { code: "F3", label: "F3", sub: "🪟" },
+        { code: "F4", label: "F4", sub: "🔍" },
+        { code: "F5", label: "F5", sub: "🎤" },
+        { code: "F6", label: "F6", sub: "🌙" },
+        { code: "F7", label: "F7", sub: "⏮" },
+        { code: "F8", label: "F8", sub: "⏯" },
+        { code: "F9", label: "F9", sub: "⏭" },
+        { code: "F10", label: "F10", sub: "🔇" },
+        { code: "F11", label: "F11", sub: "🔉" },
+        { code: "F12", label: "F12", sub: "🔊" },
+        { code: "Power", label: "⌽", w: 1 }
+      ],
+      // Row 2: Numbers
+      [
+        { code: "Backquote", label: "`", sub: "~" },
+        { code: "Digit1", label: "1", sub: "!" },
+        { code: "Digit2", label: "2", sub: "@" },
+        { code: "Digit3", label: "3", sub: "#" },
+        { code: "Digit4", label: "4", sub: "$" },
+        { code: "Digit5", label: "5", sub: "%" },
+        { code: "Digit6", label: "6", sub: "^" },
+        { code: "Digit7", label: "7", sub: "&" },
+        { code: "Digit8", label: "8", sub: "*" },
+        { code: "Digit9", label: "9", sub: "(" },
+        { code: "Digit0", label: "0", sub: ")" },
+        { code: "Minus", label: "-", sub: "_" },
+        { code: "Equal", label: "=", sub: "+" },
+        { code: "Backspace", label: "delete", w: 1.5 }
+      ],
+      // Row 3: QWERTY
+      [
+        { code: "Tab", label: "tab", w: 1.5 },
+        { code: "KeyQ", label: "Q" }, { code: "KeyW", label: "W" },
+        { code: "KeyE", label: "E" }, { code: "KeyR", label: "R" },
+        { code: "KeyT", label: "T" }, { code: "KeyY", label: "Y" },
+        { code: "KeyU", label: "U" }, { code: "KeyI", label: "I" },
+        { code: "KeyO", label: "O" }, { code: "KeyP", label: "P" },
+        { code: "BracketLeft", label: "[", sub: "{" },
+        { code: "BracketRight", label: "]", sub: "}" },
+        { code: "Backslash", label: "\\", sub: "|" }
+      ],
+      // Row 4: Home row
+      [
+        { code: "CapsLock", label: "caps lock", w: 1.75 },
+        { code: "KeyA", label: "A" }, { code: "KeyS", label: "S" },
+        { code: "KeyD", label: "D" }, { code: "KeyF", label: "F" },
+        { code: "KeyG", label: "G" }, { code: "KeyH", label: "H" },
+        { code: "KeyJ", label: "J" }, { code: "KeyK", label: "K" },
+        { code: "KeyL", label: "L" }, { code: "Semicolon", label: ";", sub: ":" },
+        { code: "Quote", label: "'", sub: "\"" },
+        { code: "Enter", label: "return", w: 1.75 }
+      ],
+      // Row 5: Shift row
+      [
+        { code: "ShiftLeft", label: "shift", w: 2.25 },
+        { code: "KeyZ", label: "Z" }, { code: "KeyX", label: "X" },
+        { code: "KeyC", label: "C" }, { code: "KeyV", label: "V" },
+        { code: "KeyB", label: "B" }, { code: "KeyN", label: "N" },
+        { code: "KeyM", label: "M" }, { code: "Comma", label: ",", sub: "<" },
+        { code: "Period", label: ".", sub: ">" }, { code: "Slash", label: "/", sub: "?" },
+        { code: "ShiftRight", label: "shift", w: 2.25 }
+      ],
+      // Row 6: Bottom modifiers & Inverted-T Arrows
+      [
+        { code: "Fn", label: "fn", sub: "🌐", w: 1 },
+        { code: "ControlLeft", label: "control", macLabel: "⌃ control", winLabel: "Ctrl", w: 1 },
+        { code: "AltLeft", label: "option", macLabel: "⌥ option", winLabel: "Alt", w: 1.25 },
+        { code: "MetaLeft", label: "command", macLabel: "⌘ command", winLabel: "⊞ Win", w: 1.35 },
+        { code: "Space", label: "", w: 5.2 },
+        { code: "MetaRight", label: "command", macLabel: "⌘ command", winLabel: "⊞ Win", w: 1.35 },
+        { code: "AltRight", label: "option", macLabel: "⌥ option", winLabel: "Alt Gr", w: 1.25 },
+        { code: "ArrowLeft", label: "◀", w: 1, halfHeight: true },
+        {
+          type: "vertical-split",
+          w: 1,
+          keys: [
+            { code: "ArrowUp", label: "▲", halfHeight: true },
+            { code: "ArrowDown", label: "▼", halfHeight: true }
+          ]
+        },
+        { code: "ArrowRight", label: "▶", w: 1, halfHeight: true }
+      ]
+    ];
+
+    const FULL_EXTRA_COLUMNS = [
+      // F-row extras + Navigation block + Numpad
+      {
+        row: 0,
+        keys: [
+          { code: "F13", label: "F13" }, { code: "F14", label: "F14" }, { code: "F15", label: "F15" },
+          { code: "F16", label: "F16" }, { code: "F17", label: "F17" }, { code: "F18", label: "F18" }, { code: "F19", label: "F19" }
+        ]
+      },
+      {
+        row: 1,
+        keys: [
+          { code: "Insert", label: "ins" }, { code: "Home", label: "home" }, { code: "PageUp", label: "pg up" },
+          { code: "NumLock", label: "clear" }, { code: "NumpadEqual", label: "=" }, { code: "NumpadDivide", label: "/" }, { code: "NumpadMultiply", label: "*" }
+        ]
+      },
+      {
+        row: 2,
+        keys: [
+          { code: "Delete", label: "del" }, { code: "End", label: "end" }, { code: "PageDown", label: "pg dn" },
+          { code: "Numpad7", label: "7" }, { code: "Numpad8", label: "8" }, { code: "Numpad9", label: "9" }, { code: "NumpadSubtract", label: "-" }
+        ]
+      },
+      {
+        row: 3,
+        keys: [
+          { spacer: 3 },
+          { code: "Numpad4", label: "4" }, { code: "Numpad5", label: "5" }, { code: "Numpad6", label: "6" }, { code: "NumpadAdd", label: "+" }
+        ]
+      },
+      {
+        row: 4,
+        keys: [
+          { spacer: 3 },
+          { code: "Numpad1", label: "1" }, { code: "Numpad2", label: "2" }, { code: "Numpad3", label: "3" },
+          { code: "NumpadEnter", label: "enter", h: 2 }
+        ]
+      },
+      {
+        row: 5,
+        keys: [
+          { spacer: 3 },
+          { code: "Numpad0", label: "0", w: 2 }, { code: "NumpadDecimal", label: "." }
+        ]
+      }
+    ];
+
+    /*************************************************************************
+     * 2. STATE & DIAGNOSTICS TELEMETRY ENGINE
+     *************************************************************************/
+    const state = {
+      theme: 'dark',
+      layout: 'compact',
+      os: 'mac',
+      soundProfile: 'scissor',
+      activeKeys: new Set(),
+      testedKeys: new Map(),
+      pressStartTimes: new Map(),
+      lastReleaseTimes: new Map(),
+      chatteredKeys: new Set(),
+      peakKRO: 0,
+      totalPresses: 0,
+      soundMuted: false
+    };
+
+    /*************************************************************************
+     * 3. AUDIO SYNTHESIZER (ZERO-DEPENDENCY WEB AUDIO API)
+     *************************************************************************/
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) audioCtx = new AudioContextClass();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playSwitchSound(type) {
+      if (state.soundMuted || state.soundProfile === 'mute') return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        const profile = type || state.soundProfile;
+
+        if (profile === 'scissor') {
+          // Crispy subtle scissor switch pop
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(1400, now);
+          osc.frequency.exponentialRampToValueAtTime(180, now + 0.035);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.04);
+        } else if (profile === 'tactile') {
+          // Warm low-pitched thock
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(320, now);
+          osc.frequency.exponentialRampToValueAtTime(75, now + 0.05);
+          gain.gain.setValueAtTime(0.3, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.06);
+        } else if (profile === 'clicky') {
+          // Sharp double-click mechanical simulation
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(2600, now);
+          osc.frequency.exponentialRampToValueAtTime(450, now + 0.02);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.03);
+        }
+      } catch (err) {
+        // Audio error caught silently
+      }
+    }
+
+    /*************************************************************************
+     * 4. AUTOMATIC OPERATING SYSTEM (OS) DETECTION
+     *************************************************************************/
+    function detectOperatingSystem() {
+      let isMac = false;
+      if (navigator.userAgentData && navigator.userAgentData.platform) {
+        const plat = navigator.userAgentData.platform.toLowerCase();
+        isMac = plat.includes('mac') || plat.includes('ios');
+      } else {
+        const platform = (navigator.platform || '').toLowerCase();
+        const userAgent = (navigator.userAgent || '').toLowerCase();
+        isMac = platform.includes('mac') || platform.includes('iphone') || platform.includes('ipad') ||
+                userAgent.includes('macintosh') || userAgent.includes('mac os x');
+      }
+
+      const detectedOS = isMac ? 'mac' : 'win';
+      state.os = detectedOS;
+
+      const badgeIcon = document.getElementById('os-detect-icon');
+      const badgeText = document.getElementById('os-detect-text');
+      if (badgeIcon && badgeText) {
+        badgeIcon.textContent = isMac ? '' : '⊞';
+        badgeText.textContent = isMac ? 'Auto: macOS' : 'Auto: Windows';
+      }
+
+      const btnMac = document.getElementById('btn-os-mac');
+      const btnWin = document.getElementById('btn-os-win');
+      if (btnMac && btnWin) {
+        btnMac.classList.toggle('active', detectedOS === 'mac');
+        btnWin.classList.toggle('active', detectedOS === 'win');
+      }
+
+      return detectedOS;
+    }
+
+    /*************************************************************************
+     * 5. SWITCHERS & APPEARANCE CONTROLS
+     *************************************************************************/
+    function setTheme(theme) {
+      state.theme = theme;
+      document.body.setAttribute('data-theme', theme);
+      const themeBtns = {
+        'light': document.getElementById('btn-theme-light'),
+        'dark': document.getElementById('btn-theme-dark'),
+        'glass': document.getElementById('btn-theme-glass')
+      };
+      Object.entries(themeBtns).forEach(([key, btn]) => {
+        if (btn) btn.classList.toggle('active', key === theme);
+      });
+    }
+
+    function setLayout(layout) {
+      state.layout = layout;
+      const btnCompact = document.getElementById('btn-layout-compact');
+      const btnFull = document.getElementById('btn-layout-full');
+      if (btnCompact && btnFull) {
+        btnCompact.classList.toggle('active', layout === 'compact');
+        btnFull.classList.toggle('active', layout === 'full');
+      }
+      renderKeyboard();
+    }
+
+    function setOSLegends(os) {
+      state.os = os;
+      const btnMac = document.getElementById('btn-os-mac');
+      const btnWin = document.getElementById('btn-os-win');
+      if (btnMac && btnWin) {
+        btnMac.classList.toggle('active', os === 'mac');
+        btnWin.classList.toggle('active', os === 'win');
+      }
+      renderKeyboard();
+    }
+
+    function setSoundProfile(profile) {
+      state.soundProfile = profile;
+      state.soundMuted = (profile === 'mute');
+      const soundBtns = {
+        'scissor': document.getElementById('btn-sound-scissor'),
+        'tactile': document.getElementById('btn-sound-tactile'),
+        'clicky': document.getElementById('btn-sound-clicky'),
+        'mute': document.getElementById('btn-sound-mute')
+      };
+      Object.entries(soundBtns).forEach(([key, btn]) => {
+        if (btn) btn.classList.toggle('active', key === profile);
+      });
+      const lbl = document.getElementById('audio-status-label');
+      if (lbl) lbl.textContent = profile === 'mute' ? 'Muted' : `${profile.toUpperCase()} Profile`;
+    }
+
+    function resetDiagnostics() {
+      state.activeKeys.clear();
+      state.testedKeys.clear();
+      state.pressStartTimes.clear();
+      state.lastReleaseTimes.clear();
+      state.chatteredKeys.clear();
+      state.peakKRO = 0;
+      state.totalPresses = 0;
+
+      document.querySelectorAll('.keycap').forEach(el => {
+        el.classList.remove('pressed', 'tested', 'chattered');
+      });
+
+      document.getElementById('active-keys-count').textContent = '0';
+      document.getElementById('peak-kro-count').textContent = '0';
+      document.getElementById('total-press-count').textContent = '0';
+      document.getElementById('chatter-count-badge').textContent = '0 detected';
+      document.getElementById('chatter-status-text').textContent = 'Normal Contact';
+      document.getElementById('chatter-indicator').classList.add('hidden');
+      document.getElementById('key-stream').innerHTML = '<span class="text-xs text-[var(--text-secondary)] opacity-60">Diagnostics cleared. Ready for input...</span>';
+      updateProgressStats();
+    }
+
+    /*************************************************************************
+     * 6. RENDERING ENGINE (KEYBOARD HTML BUILDER)
+     *************************************************************************/
+    function getKeyDisplayName(keyDef) {
+      if (state.os === 'mac' && keyDef.macLabel) return keyDef.macLabel;
+      if (state.os === 'win' && keyDef.winLabel) return keyDef.winLabel;
+      return keyDef.label || '';
+    }
+
+    function renderKeyboard() {
+      const grid = document.getElementById('key-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      const isFull = state.layout === 'full';
+      const baseUnit = 48; // px width per 1 unit
+
+      COMPACT_LAYOUT.forEach((row, rowIndex) => {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'flex items-center gap-1.5';
+
+        row.forEach(keyDef => {
+          if (keyDef.type === 'vertical-split') {
+            const splitWrap = document.createElement('div');
+            splitWrap.className = 'flex flex-col gap-1';
+            splitWrap.style.width = `${(keyDef.w || 1) * baseUnit}px`;
+
+            keyDef.keys.forEach(subKey => {
+              const el = createKeycapElement(subKey, baseUnit);
+              splitWrap.appendChild(el);
+            });
+            rowDiv.appendChild(splitWrap);
+          } else {
+            const el = createKeycapElement(keyDef, baseUnit);
+            rowDiv.appendChild(el);
+          }
+        });
+
+        // Append Extra full-size keys if in Full Layout mode
+        if (isFull && FULL_EXTRA_COLUMNS[rowIndex]) {
+          const sep = document.createElement('div');
+          sep.className = 'w-3 shrink-0';
+          rowDiv.appendChild(sep);
+
+          FULL_EXTRA_COLUMNS[rowIndex].keys.forEach(extra => {
+            if (extra.spacer) {
+              const sp = document.createElement('div');
+              sp.style.width = `${extra.spacer * baseUnit + (extra.spacer - 1) * 6}px`;
+              rowDiv.appendChild(sp);
+            } else {
+              const el = createKeycapElement(extra, baseUnit);
+              rowDiv.appendChild(el);
+            }
+          });
+        }
+
+        grid.appendChild(rowDiv);
+      });
+
+      // Update total keys counter
+      const totalRendered = document.querySelectorAll('.keycap[data-code]').length;
+      document.getElementById('total-keys-count').textContent = totalRendered;
+      updateProgressStats();
+    }
+
+    function createKeycapElement(keyDef, baseUnit) {
+      const btn = document.createElement('div');
+      btn.className = 'keycap';
+      btn.dataset.code = keyDef.code;
+
+      const widthUnits = keyDef.w || 1;
+      btn.style.width = `${widthUnits * baseUnit + (widthUnits - 1) * 6}px`;
+
+      if (keyDef.halfHeight) {
+        btn.classList.add('half-height');
+      }
+
+      if (keyDef.h === 2) {
+        btn.style.height = `${2 * baseUnit + 6}px`;
+      }
+
+      // Check current state
+      if (state.activeKeys.has(keyDef.code)) btn.classList.add('pressed');
+      else if (state.testedKeys.has(keyDef.code)) btn.classList.add('tested');
+      if (state.chatteredKeys.has(keyDef.code)) btn.classList.add('chattered');
+
+      // Labels
+      if (keyDef.sub) {
+        const sub = document.createElement('span');
+        sub.className = 'sub-label';
+        sub.textContent = keyDef.sub;
+        btn.appendChild(sub);
+      }
+
+      const main = document.createElement('span');
+      main.className = 'main-label';
+      main.textContent = getKeyDisplayName(keyDef);
+      btn.appendChild(main);
+
+      // Mouse & Touch simulation
+      btn.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        simulateKeyEvent(keyDef.code, 'keydown');
+      });
+      btn.addEventListener('mouseup', (e) => {
+        e.preventDefault();
+        simulateKeyEvent(keyDef.code, 'keyup');
+      });
+      btn.addEventListener('mouseleave', () => {
+        if (state.activeKeys.has(keyDef.code)) {
+          simulateKeyEvent(keyDef.code, 'keyup');
+        }
+      });
+
+      return btn;
+    }
+
+    function simulateKeyEvent(code, type) {
+      const ev = new KeyboardEvent(type, {
+        code: code,
+        key: code,
+        bubbles: true,
+        cancelable: true
+      });
+      window.dispatchEvent(ev);
+    }
+
+    /*************************************************************************
+     * 7. HARDWARE EVENT HANDLERS & TELEMETRY
+     *************************************************************************/
+    function mapFallbackKeyCode(keyCode) {
+      const map = {
+        8: 'Backspace', 9: 'Tab', 13: 'Enter', 16: 'ShiftLeft',
+        17: 'ControlLeft', 18: 'AltLeft', 27: 'Escape', 32: 'Space',
+        37: 'ArrowLeft', 38: 'ArrowUp', 39: 'ArrowRight', 40: 'ArrowDown',
+        46: 'Delete', 91: 'MetaLeft', 92: 'MetaRight'
+      };
+      return map[keyCode] || `Key_${keyCode}`;
+    }
+
+    function handleKeyDown(e) {
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) {
+        return;
+      }
+
+      const preventBox = document.getElementById('prevent-default-toggle');
+      if (preventBox && preventBox.checked) {
+        if (e.code !== 'F12' && e.code !== 'F5') {
+          e.preventDefault();
+        }
+      }
+
+      const code = e.code || mapFallbackKeyCode(e.keyCode);
+      const now = performance.now();
+
+      // Switch Chatter detection: Release-to-Press < 15ms
+      if (state.lastReleaseTimes.has(code)) {
+        const bounceInterval = now - state.lastReleaseTimes.get(code);
+        if (bounceInterval < 15) {
+          state.chatteredKeys.add(code);
+          document.getElementById('chatter-indicator').classList.remove('hidden');
+          document.getElementById('chatter-count-badge').textContent = `${state.chatteredKeys.size} flagged`;
+          document.getElementById('chatter-count-badge').className = 'px-2 py-0.5 rounded-full text-[10px] bg-amber-500/20 text-[var(--accent-amber)] font-mono font-bold';
+          document.getElementById('chatter-status-text').textContent = `⚠️ Bounce Detected: ${code}`;
+        }
+      }
+
+      if (!state.activeKeys.has(code)) {
+        state.activeKeys.add(code);
+        state.pressStartTimes.set(code, now);
+        state.totalPresses++;
+        playSwitchSound();
+      }
+
+      // Update Peak NKRO
+      if (state.activeKeys.size > state.peakKRO) {
+        state.peakKRO = state.activeKeys.size;
+        document.getElementById('peak-kro-count').textContent = state.peakKRO;
+      }
+
+      // Live Inspector Update
+      updateInspector(e, code);
+      updateKeycapElement(code);
+      updateTelemetryCards();
+      pushKeyStream(code, e.key);
+    }
+
+    function handleKeyUp(e) {
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) {
+        return;
+      }
+
+      const preventBox = document.getElementById('prevent-default-toggle');
+      if (preventBox && preventBox.checked) {
+        if (e.code !== 'F12' && e.code !== 'F5') {
+          e.preventDefault();
+        }
+      }
+
+      const code = e.code || mapFallbackKeyCode(e.keyCode);
+      const now = performance.now();
+
+      state.activeKeys.delete(code);
+      state.lastReleaseTimes.set(code, now);
+
+      // Register Tested
+      const count = state.testedKeys.get(code) || 0;
+      state.testedKeys.set(code, count + 1);
+
+      // Compute Hold Dwell Time
+      if (state.pressStartTimes.has(code)) {
+        const dwell = Math.round(now - state.pressStartTimes.get(code));
+        document.getElementById('inspector-dwell').textContent = `${dwell} ms`;
+        state.pressStartTimes.delete(code);
+      }
+
+      updateKeycapElement(code);
+      updateTelemetryCards();
+      updateProgressStats();
+    }
+
+    function handleWindowBlur() {
+      state.activeKeys.clear();
+      document.querySelectorAll('.keycap.pressed').forEach(el => el.classList.remove('pressed'));
+      document.getElementById('active-keys-count').textContent = '0';
+    }
+
+    function updateKeycapElement(code) {
+      const el = document.querySelector(`.keycap[data-code="${code}"]`);
+      if (!el) return;
+
+      if (state.activeKeys.has(code)) {
+        el.classList.add('pressed');
+      } else {
+        el.classList.remove('pressed');
+      }
+
+      if (state.testedKeys.has(code)) {
+        el.classList.add('tested');
+      }
+
+      if (state.chatteredKeys.has(code)) {
+        el.classList.add('chattered');
+      }
+    }
+
+    function updateInspector(e, code) {
+      const name = formatKeyLabel(e.key, code);
+      document.getElementById('inspector-main-key').textContent = name;
+      document.getElementById('inspector-code').textContent = code;
+      document.getElementById('inspector-keycode').textContent = e.keyCode || '—';
+
+      const locs = ['Standard', 'Left', 'Right', 'Numpad'];
+      document.getElementById('key-location-badge').textContent = locs[e.location] || 'Standard';
+    }
+
+    function updateTelemetryCards() {
+      document.getElementById('active-keys-count').textContent = state.activeKeys.size;
+      document.getElementById('total-press-count').textContent = state.totalPresses;
+    }
+
+    function updateProgressStats() {
+      const totalRendered = document.querySelectorAll('.keycap[data-code]').length;
+      const testedCount = state.testedKeys.size;
+      const percent = totalRendered > 0 ? Math.round((testedCount / totalRendered) * 100) : 0;
+
+      document.getElementById('tested-count').textContent = testedCount;
+      document.getElementById('coverage-percent').textContent = `${percent}%`;
+      document.getElementById('coverage-bar').style.width = `${percent}%`;
+    }
+
+    function pushKeyStream(code, key) {
+      const stream = document.getElementById('key-stream');
+      if (!stream) return;
+
+      const pill = document.createElement('span');
+      pill.className = 'history-pill stat-pill bg-black/10 dark:bg-white/10 text-[var(--text-primary)] border border-[var(--border-glass)] shrink-0';
+      pill.textContent = formatKeyLabel(key, code);
+
+      stream.prepend(pill);
+      while (stream.children.length > 15) {
+        stream.removeChild(stream.lastChild);
+      }
+    }
+
+    function markAllTestedDemo() {
+      const allKeyElements = document.querySelectorAll('.keycap[data-code]');
+      allKeyElements.forEach((el) => {
+        const code = el.dataset.code;
+        if (!state.testedKeys.has(code)) {
+          state.testedKeys.set(code, 1);
+        }
+        updateKeycapElement(code);
+      });
+      updateProgressStats();
+    }
+
+    /*************************************************************************
+     * 8. SEO & GOOGLE SEARCH CONSOLE (GSC) HUB
+     *************************************************************************/
+    function toggleSEOModal(show) {
+      const modal = document.getElementById('seo-gsc-modal');
+      if (!modal) return;
+      if (show) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        updateSEOGenerators();
+      } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function updateSEOGenerators() {
+      const rawDomain = (document.getElementById('gsc-domain-input')?.value || 'https://yourdomain.com/').trim();
+      const cleanDomain = rawDomain.endsWith('/') ? rawDomain : `${rawDomain}/`;
+      const token = (document.getElementById('gsc-token-input')?.value || 'YOUR_GSC_VERIFICATION_CODE_HERE').trim();
+      const todayISO = new Date().toISOString().split('T')[0];
+
+      const canonicalEl = document.getElementById('seo-canonical-link');
+      if (canonicalEl) canonicalEl.setAttribute('href', cleanDomain);
+
+      const ogUrlEl = document.getElementById('og-url-meta');
+      if (ogUrlEl) ogUrlEl.setAttribute('content', cleanDomain);
+
+      const gscMetaEl = document.getElementById('gsc-verification-meta');
+      if (gscMetaEl) gscMetaEl.setAttribute('content', token);
+
+      const metaTagStr = `<meta name="google-site-verification" content="${token}" />\n<link rel="canonical" href="${cleanDomain}" />`;
+      const metaOut = document.getElementById('gsc-meta-output');
+      if (metaOut) metaOut.textContent = metaTagStr;
+
+      const sitemapStr = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${cleanDomain}</loc>
+    <lastmod>${todayISO}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>`;
+      const sitemapOut = document.getElementById('gsc-sitemap-output');
+      if (sitemapOut) sitemapOut.textContent = sitemapStr;
+
+      const robotsStr = `User-agent: *
+Allow: /
+
+Sitemap: ${cleanDomain}sitemap.xml`;
+      const robotsOut = document.getElementById('gsc-robots-output');
+      if (robotsOut) robotsOut.textContent = robotsStr;
+    }
+
+    function copyGeneratedText(elementId) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const textarea = document.createElement('textarea');
+      textarea.value = el.textContent;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+
+      const toast = document.getElementById('copy-toast');
+      if (toast) {
+        toast.style.opacity = '1';
+        setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+      }
+    }
+
+    function downloadSEOFile(filename, elementId, mimeType) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const blob = new Blob([el.textContent], { type: `${mimeType};charset=utf-8` });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    /*************************************************************************
+     * 9. UTILITIES & INITIALIZATION
+     *************************************************************************/
+    function formatKeyLabel(key, code) {
+      if (code && code.startsWith('Key')) return code.slice(3);
+      if (code && code.startsWith('Digit')) return code.slice(5);
+      if (code && code.startsWith('Numpad') && code.length === 7) return code.slice(6);
+      if (key === ' ') return 'Space';
+      if (key && key.length === 1) return key.toUpperCase();
+      return key || code;
+    }
+
+    window.addEventListener('keydown', handleKeyDown, { passive: false });
+    window.addEventListener('keyup', handleKeyUp, { passive: false });
+    window.addEventListener('blur', handleWindowBlur);
+
+    window.addEventListener('DOMContentLoaded', () => {
+      detectOperatingSystem();
+      setTheme('dark');
+      renderKeyboard();
+      updateSEOGenerators();
+
+      const chassis = document.getElementById('keyboard-chassis');
+      if (chassis) {
+        window.addEventListener('mousemove', (e) => {
+          const rect = chassis.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          chassis.style.setProperty('--mouse-x', `${x}px`);
+          chassis.style.setProperty('--mouse-y', `${y}px`);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
